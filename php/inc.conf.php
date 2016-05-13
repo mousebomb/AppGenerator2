@@ -6,3 +6,4 @@
 define("FLEX_HOME","/Users/rhett/MyWork/sdks/FlexSDK/4.6.0_air");
 define("FLEX_HOME_IOS","/Users/rhett/MyWork/sdks/FlexSDK/4.6.0_air");
 define("PUBLISH_PATH","/Users/rhett/Desktop");
+define("ENCKEY",0x614E6457);

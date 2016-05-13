@@ -39,7 +39,7 @@ function encUnit(&$swfBinCursor, $offset ,$encKeyPart , &$swfBin_, &$encBin_ )
     $encUByte = $originalUByte + $encKeyPart;
     $encBin_ .= pack("C",$encUByte);
     $swfBinCursor = $offset + 1;
-    echo $encUByte . " ";
+//    echo $encUByte . " ";
 }
 
 /**
@@ -82,6 +82,7 @@ function encryptSwf($swfFile,$encFile ,$encKey)
     $fileHandle = fopen($encFile, "w+");
     fwrite($fileHandle, $encBin);
     fclose($fileHandle);
+
     echo "Done enc. [EncFileSize " . strlen($encBin) . "B]\n";
     $sl = strlen($encBin);
     if($sl < 100)
@@ -95,16 +96,4 @@ function encryptSwf($swfFile,$encFile ,$encKey)
         echo "\n";
     }
 
-
 }
-
-
-
-$swfFile  = "/Users/rhett/MyWork/2016/AppGenerator2/GameRuntime/main.swf";
-$encFile = "/Users/rhett/MyWork/2016/AppGenerator2/GameRuntime/out/production/GameRuntime/main.dat";
-//$swfFile  = "/Users/rhett/Desktop/test";
-//$encFile = "/Users/rhett/Desktop/testEnc";
-//加密密码 解密密码； apk的签名hashcode 是一个UINT32
-$encKey = 0x614E6457;
-
-encryptSwf($swfFile,$encFile ,$encKey);

@@ -45,7 +45,9 @@ $autoFillData=readSeedByAppID($appID);
     <table>
         <?php
         // 列出所有需要的
-        $uploadList = getTemplateUploadList($autoFillData['template']);
+        $uploadList1 = getTemplateUploadList($autoFillData['template']);
+        $uploadList2 = getRuntimeUploadList($autoFillData['runtime']);
+        $uploadList = array_merge($uploadList1,$uploadList2);
         // 列出所有已经录入的 在 $autoFillData  key=uploadLi  val=实际文件路径
         foreach ($uploadList as $uploadLi)
         {

@@ -74,6 +74,7 @@ $isDesktop= 'true';
 
 /*
  * 编译时会自动加入参数$type： 如 CONFIG::apk,true
+ * 桌面测试版本，不走GRRoot和GRLib，直接发布模板
  */
 # 处理编译
 $compileSwfCmd = file_get_contents($gen."/compile_swf.txt");
@@ -86,6 +87,7 @@ $output = str_replace('${ipa}',$isIpa,$output);
 $output = str_replace('${apk}',$isApk,$output);
 $output = str_replace('${desktop}',$isDesktop,$output);
 $output = str_replace('${type}',$type,$output);
+$output = str_replace('${main.swf}',MAIN_SWF,$output);
 $compileOp = execCmd($output,"编译游戏");
 $compileSucc = (count($compileOp)>1 && $compileOp[count($compileOp)-1]!="");
 if($compileSucc)

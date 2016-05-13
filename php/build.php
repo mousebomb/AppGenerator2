@@ -1,8 +1,10 @@
 <?php
 /**
+ * 桌面测试
  * 发布apk / ipa / ipa-iTC
  * Created by PhpStorm.
  * User: rhett
+ * Modified: 2016-5-13
  * Date: 15/1/19
  * Time: 20:01
  */
@@ -69,9 +71,10 @@ if($type == "desktop")
 <?php
     /*
      * 编译时会自动加入参数$type： 如 CONFIG::apk,true
+     * 这里编译不是桌面调试，需要加密，做壳
      */
-# 处理编译
-$compileSwfCmd = file_get_contents($gen."/compile_swf.txt");
+# 处理编译GRLib
+$compileSwfCmd = file_get_contents($gen."/compile_grlib.txt");
 $output = $compileSwfCmd;
 $output = str_replace('${gen}',$gen,$output);
 $output = str_replace('${AMXMLC}',AMXMLC,$output);
@@ -81,105 +84,123 @@ $output = str_replace('${ipa}',$isIpa,$output);
 $output = str_replace('${apk}',$isApk,$output);
 $output = str_replace('${desktop}',$isDesktop,$output);
 $output = str_replace('${type}',$type,$output);
-$compileOp = execCmd($output,"编译游戏");
+$compileOp = execCmd($output,"编译广告功能库");
 $compileSucc = (count($compileOp)>1 && $compileOp[count($compileOp)-1]!="");
-if($compileSucc)
+if(!$compileSucc)
 {
-    //if编译成功:
-    # package
-    switch($type)
-    {
-        case 'ipa':
-            $genipa = PUBLISH_PATH.'/'.$template.'.ipa';
-            $genipaitc = PUBLISH_PATH.'/'.$template.'-iTC.ipa';
-            # 处理打包
-            if(file_exists($gen."/build_ipa.txt"))
-            {
-                $buildIpaCmd = file_get_contents($gen."/build_ipa.txt");
-                $output = $buildIpaCmd;
-                $output = str_replace('${ADT}',ADT_IOS,$output);
-                $output = str_replace('${gen}',$gen,$output);
-                $output = str_replace('${genipa}',$genipa,$output);
-                $output = str_replace('${KEYSTORE_IOS_DEV}',KEYSTORE_IOS_DEV,$output);
-                $output = str_replace('${DEVPROVISION}',DEVPROVISION,$output);
-                $output = str_replace('${icon}',$icon,$output);
-                $output = str_replace('${debug}',$debug,$output);
-                execCmd($output,"打包ipa");
-                if(file_exists($genipa))
-                {
-                    echo "<pre>ipa保存在     ".$genipa."\n</pre>";
-                    ## 发布ipa-iTC
-                    $buildIpaCmd = file_get_contents($gen."/build_ipa_itc.txt");
-                    $provision = $gen.'/release.mobileprovision';
-                    if(file_exists($provision))
-                    {
-                        $output = $buildIpaCmd;
-                        $output = str_replace('${ADT}',ADT_IOS,$output);
-                        $output = str_replace('${gen}',$gen,$output);
-                        $output = str_replace('${genipa}',$genipaitc,$output);
-                        $output = str_replace('${KEYSTORE_IOS}',KEYSTORE_IOS,$output);
-                        $output = str_replace('${PROVISION}',$provision,$output);
-                        $output = str_replace('${icon}',$icon,$output);
-                        $output = str_replace('${debug}',$debug,$output);
-                        execCmd($output,"打包ipa iTC版");
-                        echo "<pre>苹果官方版ipa保存在     ".$genipaitc."\n</pre>";
-                    }
-                    # 尝试安装到iOS设备
-                    if($install==1)
-                    {
-                        $chkIOSDeviceCmd = ADT."  -devices -platform iOS";
+    echo  '<pre>编译广告功能库失败!</pre>';
+}else {
+    # 处理编译
+    $compileSwfCmd = file_get_contents($gen . "/compile_swf.txt");
+    $output = $compileSwfCmd;
+    $output = str_replace('${gen}', $gen, $output);
+    $output = str_replace('${AMXMLC}', AMXMLC, $output);
+    $output = str_replace('${FLEX_HOME}', FLEX_HOME, $output);
+    $output = str_replace('${debug}', $debug, $output);
+    $output = str_replace('${ipa}', $isIpa, $output);
+    $output = str_replace('${apk}', $isApk, $output);
+    $output = str_replace('${desktop}', $isDesktop, $output);
+    $output = str_replace('${type}', $type, $output);
+    $output = str_replace('${main.swf}', MAIN_SWF, $output);
+    $compileOp = execCmd($output, "编译游戏");
+    $compileSucc = (count($compileOp) > 1 && $compileOp[count($compileOp) - 1] != "");
+    if ($compileSucc) {
+        //if编译成功:
+        # 加密
+        echo( date("H:i:s")." 执行 加密 ".MAIN_SWF."  > ".MAIN_DAT."<pre>\n");
+        encryptSwf($gen."/".MAIN_SWF,$gen."/".MAIN_DAT,ENCKEY);
+        echo "</pre>";
 
-                        $op = execCmd(ADT ."  -devices -platform iOS","查找iOS设备");
+        echo( date("H:i:s")." 执行 加密 ".GRLIB_SWF." > ".GRLIB_DAT."<pre>\n");
+        encryptSwf($gen."/".GRLIB_SWF,$gen."/".GRLIB_DAT,ENCKEY);
+        echo "</pre>";
 
-                        if(empty($op[2]))
-                        {
-                            echo("<pre>无法发现ios设备</pre>");
-                        }else{
-                            //有iOS设备
-                            $deviceRawData = $op[2];
-                            $tabIndex = strpos($deviceRawData,"\t");
-                            $deviceID = substr($deviceRawData,0,$tabIndex);
-                            echo("<pre>已发现iOS设备".$deviceID ."</pre>");
-                            $installCmd = ADT." -installApp -platform ios -device ".$deviceID." -package ".$genipa;
-                            if(!empty($deviceID))
-                                execCmd($installCmd);
+        # package
+        switch ($type) {
+            case 'ipa':
+                $genipa = PUBLISH_PATH . '/' . $template . '.ipa';
+                $genipaitc = PUBLISH_PATH . '/' . $template . '-iTC.ipa';
+                # 处理打包
+                if (file_exists($gen . "/build_ipa.txt")) {
+                    $buildIpaCmd = file_get_contents($gen . "/build_ipa.txt");
+                    $output = $buildIpaCmd;
+                    $output = str_replace('${ADT}', ADT_IOS, $output);
+                    $output = str_replace('${gen}', $gen, $output);
+                    $output = str_replace('${genipa}', $genipa, $output);
+                    $output = str_replace('${KEYSTORE_IOS_DEV}', KEYSTORE_IOS_DEV, $output);
+                    $output = str_replace('${DEVPROVISION}', DEVPROVISION, $output);
+                    $output = str_replace('${icon}', $icon, $output);
+                    $output = str_replace('${debug}', $debug, $output);
+                    execCmd($output, "打包ipa");
+                    if (file_exists($genipa)) {
+                        echo "<pre>ipa保存在     " . $genipa . "\n</pre>";
+                        ## 发布ipa-iTC
+                        $buildIpaCmd = file_get_contents($gen . "/build_ipa_itc.txt");
+                        $provision = $gen . '/release.mobileprovision';
+                        if (file_exists($provision)) {
+                            $output = $buildIpaCmd;
+                            $output = str_replace('${ADT}', ADT_IOS, $output);
+                            $output = str_replace('${gen}', $gen, $output);
+                            $output = str_replace('${genipa}', $genipaitc, $output);
+                            $output = str_replace('${KEYSTORE_IOS}', KEYSTORE_IOS, $output);
+                            $output = str_replace('${PROVISION}', $provision, $output);
+                            $output = str_replace('${icon}', $icon, $output);
+                            $output = str_replace('${debug}', $debug, $output);
+                            execCmd($output, "打包ipa iTC版");
+                            echo "<pre>苹果官方版ipa保存在     " . $genipaitc . "\n</pre>";
                         }
+                        # 尝试安装到iOS设备
+                        if ($install == 1) {
+                            $chkIOSDeviceCmd = ADT . "  -devices -platform iOS";
+
+                            $op = execCmd(ADT . "  -devices -platform iOS", "查找iOS设备");
+
+                            if (empty($op[2])) {
+                                echo("<pre>无法发现ios设备</pre>");
+                            } else {
+                                //有iOS设备
+                                $deviceRawData = $op[2];
+                                $tabIndex = strpos($deviceRawData, "\t");
+                                $deviceID = substr($deviceRawData, 0, $tabIndex);
+                                echo("<pre>已发现iOS设备" . $deviceID . "</pre>");
+                                $installCmd = ADT . " -installApp -platform ios -device " . $deviceID . " -package " . $genipa;
+                                if (!empty($deviceID))
+                                    execCmd($installCmd);
+                            }
+                        }
+                    } else {
+                        echo "<pre>ipa保存失败 \n</pre>";
                     }
-                }else{
-                    echo "<pre>ipa保存失败 \n</pre>";
+                } else {
+                    echo "<pre>本项目不支持ipa</pre>";
                 }
-            }else{
-                echo "<pre>本项目不支持ipa</pre>";
-            }
 
-            break;
-        case 'apk':
+                break;
+            case 'apk':
 
-            $genapk = PUBLISH_PATH.'/'.$template.'.apk';
-            # 处理打包
-            $buildApkCmd = file_get_contents($gen."/build_apk.txt");
-            $output = $buildApkCmd;
-            $output = str_replace('${gen}',$gen,$output);
-            $output = str_replace('${genapk}',$genapk,$output);
-            $output = str_replace('${KEYSTORE}',$KEYSTORE,$output);
-            $output = str_replace('${ADT}',ADT,$output);
-            $output = str_replace('${icon}',$icon,$output);
-            $output = str_replace('${debug}',$debug,$output);
-            execCmd($output,"打包apk");
+                $genapk = PUBLISH_PATH . '/' . $template . '.apk';
+                # 处理打包
+                $buildApkCmd = file_get_contents($gen . "/build_apk.txt");
+                $output = $buildApkCmd;
+                $output = str_replace('${gen}', $gen, $output);
+                $output = str_replace('${genapk}', $genapk, $output);
+                $output = str_replace('${KEYSTORE}', $KEYSTORE, $output);
+                $output = str_replace('${ADT}', ADT, $output);
+                $output = str_replace('${icon}', $icon, $output);
+                $output = str_replace('${debug}', $debug, $output);
+                execCmd($output, "打包apk");
 
-            # 尝试安装到手机
-            if($install==1)
-                execCmd(FLEX_HOME."/lib/android/bin/adb install -r ".$genapk,"尝试安装到手机");
-//            execCmd(APP_ROOT."/util/adb install -r ".$genapk,"尝试安装到手机");
+                # 尝试安装到手机
+                if ($install == 1)
+                    execCmd(FLEX_HOME . "/lib/android/bin/adb install -r " . $genapk, "尝试安装到手机");
+                //            execCmd(APP_ROOT."/util/adb install -r ".$genapk,"尝试安装到手机");
 
-            break;
+                break;
+        }
+    } else {
+        echo  '<pre>编译主程序失败!</pre>';
     }
-}else{
-    ?>
-    <pre>编译主程序失败!</pre>
-<?php
 }
-
 ?>
 
 <h1>4.编译与发布</h1>

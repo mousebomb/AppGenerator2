@@ -75,6 +75,27 @@ $autoFillData= readSeedByAppID($appID);
             </td>
         </tr>
         <tr>
+            <td>使用运行壳环境</td>
+            <td>
+                <select name="runtime" id="runtimeSel" onchange="validateRuntimeDesc();">
+                    <?php
+                    $filesInRuntimes = scandir(RUNTIMES_ROOT);
+                    foreach ($filesInRuntimes as $eachRuntimeFile)
+                    {
+                        if($eachRuntimeFile == "." || $eachRuntimeFile=="..") continue;
+                        if(!is_dir(RUNTIMES_ROOT."/".$eachRuntimeFile)) continue;
+                        $runtimeName = $eachRuntimeFile;
+                        ?>
+                        <option value="<?php echo $runtimeName; ?>"><?php echo $runtimeName; ?></option>
+                        <?php
+                    }
+
+                    ?>
+                </select>
+
+            </td>
+        </tr>
+        <tr>
             <td>使用签名（安卓）</td>
             <td>
                 <select name="p12Apk" id="p12ApkSel" >
@@ -110,9 +131,8 @@ $autoFillData= readSeedByAppID($appID);
 
 
 </form>
-<div id="descDiv">
-
-</div>
+<div id="descDiv"></div>
+<div id="runtimeDescDiv"></div>
 
 
 <script type="text/javascript">
@@ -128,8 +148,21 @@ $autoFillData= readSeedByAppID($appID);
         var $descDiv = $("#descDiv");
         $descDiv.html(data);
     }
+    function validateRuntimeDesc()
+    {
+        var $runtimeSel = document.getElementById("runtimeSel");
+        var $descDiv = $("#runtimeDescDiv");
+        $descDiv.html("");
+        $.get("../AppRuntimes/" + $runtimeSel.value+"/index.html",{},copyRuntimeDesc);
+    }
+    function copyRuntimeDesc(data ,status)
+    {
+        var $descDiv = $("#runtimeDescDiv");
+        $descDiv.html(data);
+    }
 
     validateDesc();
+    validateRuntimeDesc();
 </script>
 
 </body>

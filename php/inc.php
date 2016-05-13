@@ -27,6 +27,7 @@ define("APP_ROOT",dirname(dirname(__FILE__)));
 define("PHP_ROOT",dirname(__FILE__));
 define("GENERATOED_ROOT",APP_ROOT."/Generated");
 define("TEMPLATES_ROOT",APP_ROOT."/AppTemplates");
+define("RUNTIMES_ROOT",APP_ROOT."/AppRuntimes");
 define("P12_ROOT",APP_ROOT."/p12");
 
 require_once(PHP_ROOT.'/inc.conf.php');
@@ -50,18 +51,18 @@ define("DEVPROVISION",P12_ROOT."/aoaoDev.mobileprovision");
 define("STOREPASS","ilikeasp");
 define("STOREPASS_IOS","aoaogame");
 
-#打包baidu apk
-define("WORK_FOLDER",APP_ROOT."/packBaiduAPK");
-define("KEYSTORE_PATH",WORK_FOLDER."/android.keystore");
-define("KEYSTORE_ALIAS","1");
-define("KEYSTORE_STOREPASS","ilikeasp");
-define("KEYSTORE_KEYPASS","ilikeasp");
+#配合壳的加密功能
+define("MAIN_SWF",'main.swf');
+define("MAIN_DAT",'main.dat');
+define("GRLIB_SWF",'grlib.swf');
+define("GRLIB_DAT",'grlib.dat');
 
 
 
 // 递归拷贝文件
 include_once(PHP_ROOT."/CopyFile.php");
 include_once(PHP_ROOT."/functions.php");
+include_once(PHP_ROOT."/encrypt.php");
 
 //循环删除目录和文件函数
 function delDirAndFile( $dirName )
@@ -124,6 +125,21 @@ function getUserP12OrDefaultP12($p12ApkInFillData,$appID)
         # 用用户选择的keystore
         return $p12Apk;
     }
+}
+# 读取模板常量配置
+function readVarsC($template)
+{
+    $end = array();
+    $templateUploadListFile = TEMPLATES_ROOT."/".$template."/fillvarsc.txt";
+    $uploadListTxt = file_get_contents($templateUploadListFile);
+    $uploadListArr = explode("\n",$uploadListTxt);
+    foreach ($uploadListArr as $eachUploadLi)
+    {
+        if(substr($eachUploadLi,0,1) == "#") continue;
+        $arr = explode("=",$eachUploadLi);
+        $end[$arr[0]] = $arr[1];
+    }
+    return $end;
 }
 # 读取种子； 获得Gen目录下的inf记录的数据(Array)，已经存入的数据;
 function readSeedByAppID($appID)
@@ -191,6 +207,32 @@ function getTemplateSetting($template,$settingName)
     }
     return $end;
 }
+/**
+ * 获得app壳 需要上传的列表
+ * @param $runtime String 壳名
+ */
+function getRuntimeUploadList($runtime)
+{
+    return getRuntimeSetting($runtime,'uploadlist');
+}
+function getRuntimeReplaceList($runtime)
+{
+    return getRuntimeSetting($runtime,'replacelist');
+}
+// 数组
+function getRuntimeSetting($runtime,$settingName)
+{
+    $end = array();
+    $templateUploadListFile = RUNTIMES_ROOT."/".$runtime."/$settingName.txt";
+    $uploadListTxt = file_get_contents($templateUploadListFile);
+    $uploadListArr = explode("\n",$uploadListTxt);
+    foreach ($uploadListArr as $eachUploadLi)
+    {
+        if(substr($eachUploadLi,0,1) == "#") continue;
+        $end[] = $eachUploadLi;
+    }
+    return $end;
+}
 
 /**
  * KVPair  v:placeholder
@@ -202,6 +244,30 @@ function getTemplateFillvarsList($template)
     $end = array();
     $templateUploadListFile = TEMPLATES_ROOT."/".$template."/fillvars.txt";
     $uploadListTxt = file_get_contents($templateUploadListFile);
+    $uploadListArr = explode("\n",$uploadListTxt);
+    foreach ($uploadListArr as $eachUploadLi)
+    {
+        if(substr($eachUploadLi,0,1) == "#") continue;
+        $index1 = strpos($eachUploadLi,":");
+        $index2 = strpos($eachUploadLi,"=");
+        $label = substr($eachUploadLi,0,$index1);
+        $key = substr($eachUploadLi,$index1+1,$index2-$index1-1);
+        $placeholder = substr($eachUploadLi,$index2+1);
+        if($label == "") $label = $key;
+        $end[$key] = array('label'=>$label,'placeholder'=>$placeholder);
+    }
+    return $end;
+}
+/**
+ * KVPair  v:placeholder
+ * @param $template
+ * @return array
+ */
+function getRuntimeFillvarsList($runtime)
+{
+    $end = array();
+    $runtimeUploadListFile = RUNTIMES_ROOT."/".$runtime."/fillvars.txt";
+    $uploadListTxt = file_get_contents($runtimeUploadListFile);
     $uploadListArr = explode("\n",$uploadListTxt);
     foreach ($uploadListArr as $eachUploadLi)
     {

@@ -14,10 +14,13 @@ $appID=input('id');
 $autoFillData=readSeedByAppID($appID);
 
 $template=$autoFillData['template'];
+$runtime=$autoFillData['runtime'];
+
+$autoFillDataC = readVarsC($template);
 
 #gen Folder
-$aslib = APP_ROOT."/aslib";
 $templ = TEMPLATES_ROOT."/".$template;
+$rt = RUNTIMES_ROOT."/".$runtime;
 $gen = GENERATOED_ROOT."/app".$appID;
 $icon = $gen."/icon";
 @mkdir($icon);
@@ -25,7 +28,6 @@ $icon = $gen."/icon";
 $assets = $gen."/assets";
 $lib = $gen."/lib";
 $src = $gen."/src";
-$src2 = $gen."/src_adsaoao";
 @mkdir($assets);
 // 如果有lib 先删除
 if(file_exists($lib) && is_dir($lib))
@@ -37,23 +39,27 @@ if(file_exists($src) && is_dir($src))
 {
     delDirAndFile($src);
 }
-if(file_exists($src2) && is_dir($src2))
-{
-    delDirAndFile($src2);
-}
 
 new CopyFile($templ,$gen);
-new CopyFile($aslib,$lib);
+new CopyFile($rt,$gen);
 
 //  替换内容 replacelist.txt ，检测上传的内容 uploadlist.txt 是否完整
 
-# 替换replacelist.txt 要求的内容
-    $replaceList = getTemplateReplaceList($template);
+# 替换replacelist.txt 要求的内容文本  (模板的＋运行壳的）
+    $replaceListTpl = getTemplateReplaceList($template);
+    $replaceListRt = getRuntimeReplaceList($runtime);
+    $replaceList = array_merge($replaceListTpl,$replaceListRt);
     foreach ($replaceList as $eachReplaceFile)
     {
-        $output = file_get_contents($templ."/".$eachReplaceFile);
+        $output = file_get_contents($gen."/".$eachReplaceFile);
         // 遍历 从填入的配置 替换到文件
         foreach ($autoFillData as $autoFillKey => $autoFillVal)
+        {
+            $search = sprintf('${%s}',$autoFillKey);
+            $output = str_replace($search,$autoFillVal,$output);
+        }
+        // 遍历 从模板常量的配置 替换到文件
+        foreach ($autoFillDataC as $autoFillKey => $autoFillVal)
         {
             $search = sprintf('${%s}',$autoFillKey);
             $output = str_replace($search,$autoFillVal,$output);
@@ -62,8 +68,10 @@ new CopyFile($aslib,$lib);
         file_put_contents($gen."/".$eachReplaceFile,$output);
     }
 
-# 检测上传的内容
-    $uploadList = getTemplateUploadList($template);
+# 检测上传覆盖的文件
+    $uploadList1 = getTemplateUploadList($template);
+    $uploadList2 = getRuntimeUploadList($runtime);
+    $uploadList = array_merge($uploadList1,$uploadList2);
     // 列出所有已经录入的 在 $autoFillData  key=uploadLi  val=实际文件路径
     foreach ($uploadList as $uploadLi)
     {

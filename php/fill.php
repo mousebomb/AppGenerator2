@@ -41,6 +41,29 @@ $autoFillData=readSeedByAppID($appID);
 <form action="fill-handle.php" method="post">
 
     <input name="appID" type="hidden" value="<?php echo $appID; ?>"/>
+<!--    运行壳环境的-->
+    <table>
+        <?php
+        $fillvarsList = getRuntimeFillvarsList($autoFillData['runtime']);
+
+        foreach ($fillvarsList as $eachKey => $eachVO)
+        {
+            $eachLabel = $eachVO['label'];
+            $eachPlaceholder    =$eachVO['placeholder'];
+            ?>
+            <tr>
+                <td><?php echo $eachLabel; ?></td>
+                <td><input type="text" name="<?php echo $eachKey; ?>" placeholder="如：<?php echo $eachPlaceholder; ?>"
+                           id="" value="<?php echo $autoFillData[$eachKey]; ?>" /></td>
+            </tr>
+
+            <?php
+        }
+
+
+        ?>
+    </table>
+<!--    模板的 -->
     <table>
         <?php
         $fillvarsList = getTemplateFillvarsList($autoFillData['template']);

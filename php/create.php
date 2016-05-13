@@ -15,8 +15,7 @@ require_once dirname(__FILE__) . "/inc.php";
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>创建App种子</title>
     <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/general.css"/>
-    <link rel="stylesheet" href="css/extra.css"/>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
 </head>
 <body>
@@ -38,7 +37,7 @@ require_once dirname(__FILE__) . "/inc.php";
         <tr>
             <td>使用模板</td>
             <td>
-                <select name="template" id="">
+                <select name="template" id="templateSel" onchange="validateDesc();">
                     <?php
                     $filesInTemplates = scandir(TEMPLATES_ROOT);
                     foreach ($filesInTemplates as $eachTemplateFolder)
@@ -48,7 +47,28 @@ require_once dirname(__FILE__) . "/inc.php";
                         $templateName = $eachTemplateFolder;
                         ?>
                         <option value="<?php echo $templateName; ?>"><?php echo $templateName; ?></option>
+                        <?php
+                    }
+
+                    ?>
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>使用运行壳环境</td>
+            <td>
+                <select name="runtime" id="runtimeSel" onchange="validateRuntimeDesc();">
                     <?php
+                    $filesInRuntimes = scandir(RUNTIMES_ROOT);
+                    foreach ($filesInRuntimes as $eachRuntimeFile)
+                    {
+                        if($eachRuntimeFile == "." || $eachRuntimeFile=="..") continue;
+                        if(!is_dir(RUNTIMES_ROOT."/".$eachRuntimeFile)) continue;
+                        $runtimeName = $eachRuntimeFile;
+                        ?>
+                        <option value="<?php echo $runtimeName; ?>"><?php echo $runtimeName; ?></option>
+                        <?php
                     }
 
                     ?>
@@ -92,6 +112,39 @@ require_once dirname(__FILE__) . "/inc.php";
 
 
 </form>
+<div id="descDiv"></div>
+<div id="runtimeDescDiv"></div>
+
+
+<script type="text/javascript">
+    function validateDesc()
+    {
+        var $templateSel = document.getElementById("templateSel");
+        var $descDiv = $("#descDiv");
+        $descDiv.html("");
+        $.get("../AppTemplates/" + $templateSel.value+"/index.html",{},copyDesc);
+    }
+    function copyDesc(data ,status)
+    {
+        var $descDiv = $("#descDiv");
+        $descDiv.html(data);
+    }
+    function validateRuntimeDesc()
+    {
+        var $runtimeSel = document.getElementById("runtimeSel");
+        var $descDiv = $("#runtimeDescDiv");
+        $descDiv.html("");
+        $.get("../AppRuntimes/" + $runtimeSel.value+"/index.html",{},copyRuntimeDesc);
+    }
+    function copyRuntimeDesc(data ,status)
+    {
+        var $descDiv = $("#runtimeDescDiv");
+        $descDiv.html(data);
+    }
+
+    validateDesc();
+    validateRuntimeDesc();
+</script>
 
 </body>
 </html>
