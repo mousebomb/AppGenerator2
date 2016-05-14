@@ -71,7 +71,7 @@ $p12EncKeyDic = array(
     ,"ba89986008630f3321550dfd362a55d5" =>1480514856
 );
 // 加密密钥 iOS专用写死
-define("ENCKEY_IOS",0x674E6457);
+define("ENCKEY_IOS",1733190743);
 
 
 // 递归拷贝文件
