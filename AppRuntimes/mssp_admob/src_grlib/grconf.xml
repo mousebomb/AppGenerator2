@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conf
+        iosBaiduAppID="${iosBaiduAppID}"
+        iosBaiduBanner="${iosBaiduBanner}"
+        iosBaiduInterstitial="${iosBaiduInterstitial}"
+        androidBaiduAppID="${androidBaiduAppID}"
+        androidBaiduBanner="${androidBaiduBanner}"
+        androidBaiduInterstitial="${androidBaiduInterstitial}"
+
+        iosAdmobBanner="${iosAdmobBanner}"
+        iosAdmobInterstitial="${iosAdmobInterstitial}"
+        androidAdmobBanner="${androidAdmobBanner}"
+        androidAdmobInterstitial="${androidAdmobInterstitial}"
+
+        interstitialAdLevel="${interstitialAdLevel}"
+        isBannerBottom="${isBannerBottom}"
+        moreClosePos="${moreClosePos}"
+        >
+</conf>

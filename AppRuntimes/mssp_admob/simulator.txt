@@ -1,0 +1,4 @@
+${ADL}
+-profile mobileDevice
+-screensize ${screensize}
+ ${gen}/app-desktop.xml

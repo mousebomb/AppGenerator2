@@ -1,0 +1,23 @@
+# replacelist 额外要填充的变量
+版本:version=1.0
+名字:zhName=游戏名称
+繁体名字:twName=游戏名
+英文名字:enName=GameName
+包名:buneleID=com.aoaogame.game61
+统计ID-iOS:iosUMeng=53b8c86056240b32fb077c39
+统计ID-安卓:androidUMeng=53b8c81d56240b1d3405f238
+AdMob-iOS-Banner:iosAdmobBanner=ca-app-pub-3981702146870599/4421997815
+AdMob-iOS-插屏:iosAdmobInterstitial=ca-app-pub-3981702146870599/5898731011
+AdMob-安卓-Banner:androidAdmobBanner=
+AdMob-安卓-插屏:androidAdmobInterstitial=
+MSSP-iOS-AppID (*不支持后台切换) :iosBaiduAppID=af25c5ae
+MSSP-iOS-Banner (*不支持后台切换) :iosBaiduBanner=2502783
+MSSP-iOS-插屏 (*不支持后台切换) :iosBaiduInterstitial=2502793
+MSSP-安卓-AppID (*不支持后台切换) :androidBaiduAppID=df49eec7
+MSSP-安卓-Banner (*不支持后台切换) :androidBaiduBanner=df49eec7
+MSSP-安卓-插屏 (*不支持后台切换) :androidBaiduInterstitial=df49eec7
+通知标题 *:notificationTitle=一起来开动脑筋
+通知标题（英文） *:notificationTitleEn=Let us play
+滑动来___ *:notificationAction=装扮
+滑动来___（英文） *:notificationActionEn=Dress
+每N次调用才真正显示插屏*:interstitialAdLevel=1

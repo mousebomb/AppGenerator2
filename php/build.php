@@ -84,11 +84,11 @@ $output = str_replace('${ipa}',$isIpa,$output);
 $output = str_replace('${apk}',$isApk,$output);
 $output = str_replace('${desktop}',$isDesktop,$output);
 $output = str_replace('${type}',$type,$output);
-$compileOp = execCmd($output,"编译广告功能库");
+$compileOp = execCmd($output,"编译运行壳环境");
 $compileSucc = (count($compileOp)>1 && $compileOp[count($compileOp)-1]!="");
 if(!$compileSucc)
 {
-    echo  '<pre>编译广告功能库失败!</pre>';
+    echo  '<pre>编译运行壳环境失败!</pre>';
 }else {
     # 处理编译
     $compileSwfCmd = file_get_contents($gen . "/compile_swf.txt");
