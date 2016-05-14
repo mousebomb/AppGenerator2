@@ -121,6 +121,7 @@ if(!$compileSucc)
         echo "</pre>";
 
         # package
+        $buildAddtionalCmd = file_get_contents($templ . "/build_additional.txt");
         switch ($type) {
             case 'ipa':
                 $genipa = PUBLISH_PATH . '/' . $template . '.ipa';
@@ -128,7 +129,7 @@ if(!$compileSucc)
                 # 处理打包
                 if (file_exists($gen . "/build_ipa.txt")) {
                     $buildIpaCmd = file_get_contents($gen . "/build_ipa.txt");
-                    $output = $buildIpaCmd;
+                    $output = $buildIpaCmd ." ".$buildAddtionalCmd;
                     $output = str_replace('${ADT}', ADT_IOS, $output);
                     $output = str_replace('${gen}', $gen, $output);
                     $output = str_replace('${genipa}', $genipa, $output);
@@ -143,7 +144,7 @@ if(!$compileSucc)
                         $buildIpaCmd = file_get_contents($gen . "/build_ipa_itc.txt");
                         $provision = $gen . '/release.mobileprovision';
                         if (file_exists($provision)) {
-                            $output = $buildIpaCmd;
+                            $output = $buildIpaCmd." ".$buildAddtionalCmd;
                             $output = str_replace('${ADT}', ADT_IOS, $output);
                             $output = str_replace('${gen}', $gen, $output);
                             $output = str_replace('${genipa}', $genipaitc, $output);
@@ -186,7 +187,7 @@ if(!$compileSucc)
                 $genapk = PUBLISH_PATH . '/' . $template . '.apk';
                 # 处理打包
                 $buildApkCmd = file_get_contents($gen . "/build_apk.txt");
-                $output = $buildApkCmd;
+                $output = $buildApkCmd." ".$buildAddtionalCmd;
                 $output = str_replace('${gen}', $gen, $output);
                 $output = str_replace('${genapk}', $genapk, $output);
                 $output = str_replace('${KEYSTORE}', $KEYSTORE, $output);
