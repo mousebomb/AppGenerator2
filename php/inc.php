@@ -28,6 +28,7 @@ define("PHP_ROOT",dirname(__FILE__));
 define("GENERATOED_ROOT",APP_ROOT."/Generated");
 define("TEMPLATES_ROOT",APP_ROOT."/AppTemplates");
 define("RUNTIMES_ROOT",APP_ROOT."/AppRuntimes");
+define("GR_ROOT",APP_ROOT."/GRROOT");
 define("P12_ROOT",APP_ROOT."/p12");
 
 require_once(PHP_ROOT.'/inc.conf.php');
@@ -56,12 +57,28 @@ define("MAIN_SWF",'main.swf');
 define("MAIN_DAT",'main.dat');
 define("GRLIB_SWF",'grlib.swf');
 define("GRLIB_DAT",'grlib.dat');
-
+// 加密密钥 对应apk的p12
+$p12EncKeyDic = array(
+    "6184baddd695a206cbd204316d57096c" =>0x614E6457
+    ,"d8170fea676baef776482f2cd6193b88" =>3638492247
+    ,"ce115647baee6341b1995cd2f4e4cdf4" =>441278863
+    ,"d2eb998e70c622514803caa079f5edd8" =>3792682870
+    ,"d3f381c8eda8373be21189ef693af1a4" =>1335326177
+    ,"b7b2a55c792ec67b5255411a16f9a128" =>3848101768
+    ,"7b034a98b6c58161fa2c8d20835664c6" =>2064644735
+    ,"4fb4dc2cabb94baeeab351fa96d3d97a" =>1727913912
+    ,"336ccbe7d912771d981a8287cc8c451a" =>2227853901
+    ,"ba89986008630f3321550dfd362a55d5" =>1480514856
+);
+// 加密密钥 iOS专用写死
+define("ENCKEY_IOS",0x674E6457);
 
 
 // 递归拷贝文件
 include_once(PHP_ROOT."/CopyFile.php");
+// 各种函数
 include_once(PHP_ROOT."/functions.php");
+// 加密
 include_once(PHP_ROOT."/encrypt.php");
 
 //循环删除目录和文件函数
@@ -126,6 +143,15 @@ function getUserP12OrDefaultP12($p12ApkInFillData,$appID)
         return $p12Apk;
     }
 }
+# 根据选择的p12(APK)返回加密密钥
+function getEncKeyForP12($p12File)
+{
+    $p12Path = P12_ROOT."/".$p12File;
+    $fileMD5 = md5_file($p12Path);
+    global $p12EncKeyDic;
+    return $p12EncKeyDic[ $fileMD5];
+}
+
 # 读取模板常量配置
 function readVarsC($template)
 {

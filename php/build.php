@@ -107,12 +107,17 @@ if(!$compileSucc)
     if ($compileSucc) {
         //if编译成功:
         # 加密
+        if($type == 'ipa')
+        {
+            $encKey = ENCKEY_IOS;
+        }else{
+            $encKey = getEncKeyForP12($p12Apk);
+        }
         echo( date("H:i:s")." 执行 加密 ".MAIN_SWF."  > ".MAIN_DAT."<pre>\n");
-        encryptSwf($gen."/".MAIN_SWF,$gen."/".MAIN_DAT,ENCKEY);
+        encryptSwf($gen."/".MAIN_SWF,$gen."/".MAIN_DAT,$encKey);
         echo "</pre>";
-
         echo( date("H:i:s")." 执行 加密 ".GRLIB_SWF." > ".GRLIB_DAT."<pre>\n");
-        encryptSwf($gen."/".GRLIB_SWF,$gen."/".GRLIB_DAT,ENCKEY);
+        encryptSwf($gen."/".GRLIB_SWF,$gen."/".GRLIB_DAT,$encKey);
         echo "</pre>";
 
         # package

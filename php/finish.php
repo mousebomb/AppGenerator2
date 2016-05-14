@@ -40,6 +40,7 @@ if(file_exists($src) && is_dir($src))
     delDirAndFile($src);
 }
 
+new CopyFile(GR_ROOT,$gen);
 new CopyFile($templ,$gen);
 new CopyFile($rt,$gen);
 
