@@ -79,19 +79,8 @@ package {
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onStage);
 			GameConf.onStage(stage, this);
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			// setTimeout(start, 100);
 			start();
-		}
-
-		private function onKeyDown(event : KeyboardEvent) : void
-		{
-			if (event.keyCode == Keyboard.BACK)
-			{
-				event.preventDefault();
-				NativeApplication.nativeApplication.activeWindow.close();
-				NativeApplication.nativeApplication.exit();
-			}
 		}
 
 		public function replaceScene(scene : Sprite) : void

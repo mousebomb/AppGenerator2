@@ -18,4 +18,5 @@ ${ADT}
 -e ${icon}/96.png AppIcons/96x96-96.png
 -e ${icon}/144.png AppIcons/144x144-144.png
 -e ${icon}/192.png AppIcons/192x192-192.png
+-C ${gen}/lib/biduad_plugin __pasys_remote_banner.jar
 -extdir ${gen}/lib

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application xmlns="http://ns.adobe.com/air/application/20.0">
+<application xmlns="http://ns.adobe.com/air/application/17.0">
   <id>${buneleID}</id>
   <filename>Game</filename>
   <name>
@@ -34,23 +34,23 @@
           <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
-      <!--&lt;!&ndash; UMeng &ndash;&gt;-->
-      <!--<meta-data android:value="${androidUMeng}" android:name="UMENG_APPKEY" />-->
-      <!--<meta-data android:value="UMChannel_Debug" android:name="UMENG_CHANNEL"/>-->
-                    <!--<service android:name="com.juankpro.ane.localnotif.LocalNotificationIntentService"/>-->
-                    <!--<receiver android:name="com.juankpro.ane.localnotif.AlarmIntentService" />-->
-                    <!--<receiver android:name="com.juankpro.ane.localnotif.AlarmRestoreOnBoot" >-->
-                        <!--<intent-filter>-->
-                            <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
-                        <!--</intent-filter>-->
-                    <!--</receiver>-->
+      <!-- UMeng -->
+      <meta-data android:value="${androidUMeng}" android:name="UMENG_APPKEY" />
+      <meta-data android:value="UMChannel_Debug" android:name="UMENG_CHANNEL"/>
+                    <service android:name="com.juankpro.ane.localnotif.LocalNotificationIntentService"/>
+                    <receiver android:name="com.juankpro.ane.localnotif.AlarmIntentService" />
+                    <receiver android:name="com.juankpro.ane.localnotif.AlarmRestoreOnBoot" >
+                        <intent-filter>
+                            <action android:name="android.intent.action.BOOT_COMPLETED" />
+                        </intent-filter>
+                    </receiver>
 
-		<!--&lt;!&ndash; AdMob &ndash;&gt;-->
-		<!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />-->
-		<!--<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>-->
-        <!--&lt;!&ndash; baidu &ndash;&gt;-->
-        <!--<activity android:name="com.baidu.mobads.AppActivity"-->
-                  <!--android:configChanges="keyboard|keyboardHidden|orientation" />-->
+		<!-- AdMob -->
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <!-- baidu -->
+        <activity android:name="com.baidu.mobads.AppActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation" />
 
 
     </application>
@@ -73,9 +73,10 @@
   <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
   <extensions>
       <extensionID>org.mousebomb.ane.getsignhash</extensionID>
-    <!--<extensionID>so.cuo.platform.baidu</extensionID>-->
-    <!--<extensionID>so.cuo.platform.admob</extensionID>-->
-    <!--<extensionID>ane.ios.UMMobClickAne</extensionID>-->
+      <extensionID>so.cuo.platform.baidussp</extensionID>
+      <extensionID>so.cuo.platform.admob</extensionID>
+      <extensionID>ane.ios.UMMobClickAne</extensionID>
+      <extensionID>com.juankpro.ane.LocalNotification</extensionID>
   </extensions>
   <icon>
     <image144x144>AppIcons/144x144-144.png</image144x144>

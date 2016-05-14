@@ -1,5 +1,5 @@
 # 模板对runtime设置的固定参数 模板决定的常量（不需要用户填写）
 renderMode=auto
 aspectRatio=portrait
-isBannerBottom=true
-moreClosePos=BL
+isBannerBottom=false
+moreClosePos=LEFT_DOWN

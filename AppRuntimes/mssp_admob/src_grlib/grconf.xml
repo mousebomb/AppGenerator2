@@ -12,8 +12,16 @@
         androidAdmobBanner="${androidAdmobBanner}"
         androidAdmobInterstitial="${androidAdmobInterstitial}"
 
+        iosUMeng = "${iosUMeng}"
+
         interstitialAdLevel="${interstitialAdLevel}"
         isBannerBottom="${isBannerBottom}"
         moreClosePos="${moreClosePos}"
+        appID="${appID}"
+
+        notificationTitleEn="${notificationTitleEn}"
+        notificationTitle="${notificationTitle}"
+        notificationActionEn="${notificationActionEn}"
+        notificationAction="${notificationAction}"
         >
 </conf>

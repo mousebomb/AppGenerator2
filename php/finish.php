@@ -28,6 +28,7 @@ $icon = $gen."/icon";
 $assets = $gen."/assets";
 $lib = $gen."/lib";
 $src = $gen."/src";
+$src2 = $gen."/src_grlib";
 @mkdir($assets);
 // 如果有lib 先删除
 if(file_exists($lib) && is_dir($lib))
@@ -38,6 +39,10 @@ if(file_exists($lib) && is_dir($lib))
 if(file_exists($src) && is_dir($src))
 {
     delDirAndFile($src);
+}
+if(file_exists($src2) && is_dir($src2))
+{
+    delDirAndFile($src2);
 }
 
 new CopyFile(GR_ROOT,$gen);

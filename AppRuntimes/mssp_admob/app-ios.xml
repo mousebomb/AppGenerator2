@@ -10,6 +10,7 @@
       <text xml:lang="en">${enName}</text>
   </name>
   <versionNumber>${version}</versionNumber>
+  <versionLabel>${version}</versionLabel>
   <initialWindow>
     <content>GRRootIOS.swf</content>
     <aspectRatio>${aspectRatio}</aspectRatio>
@@ -32,8 +33,11 @@
   </iPhone>
   <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
   <extensions>
+    <extensionID>so.cuo.platform.baidussp</extensionID>
+    <extensionID>so.cuo.platform.admob</extensionID>
+    <extensionID>ane.ios.UMMobClickAne</extensionID>
+    <extensionID>com.juankpro.ane.LocalNotification</extensionID>
   </extensions>
-  <versionLabel>${version}</versionLabel>
   <icon>
     <image120x120>AppIcons/120.png</image120x120>
     <image152x152>AppIcons/152.png</image152x152>
