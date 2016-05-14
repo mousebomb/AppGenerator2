@@ -55,10 +55,10 @@ package
 		{
 
 			// more
-			if( ApplicationDomain.currentDomain.hasDefinition( "com.aoaogame.sdk.adManager.MyAdManager" ) )
+			if( ApplicationDomain.currentDomain.hasDefinition( "GRLib" ) )
 			{
-				var MyAdManager = getDefinitionByName( "com.aoaogame.sdk.adManager.MyAdManager" ) as Class;
-				return MyAdManager.showMoreBtn;
+				var GRLib = getDefinitionByName( "GRLib" ) as Class;
+				return GRLib.showMoreBtn;
 			} else
 			{
 				return false;

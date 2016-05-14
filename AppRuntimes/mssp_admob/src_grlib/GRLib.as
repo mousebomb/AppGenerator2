@@ -62,6 +62,8 @@ package
 			JuHeGg.instance.addEventListener(JuHeGg.GET_DATA_FAIL, onAdConfigData);
 			//
 
+			// aoao Ad
+			MyAdManager.init(grConf.aoaoAppID, stage);
 			// aoao analysis
 			AnalysisManager.instance.setAnalytics(grConf.aoaoAppID, "com.aoaogame.game"+grConf.aoaoAppID+".analysis");
 			// UMAnalytics
