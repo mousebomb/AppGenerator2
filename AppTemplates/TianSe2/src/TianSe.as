@@ -57,7 +57,10 @@ package {
 			_scene = new MainView();
 			addChild(_scene);
 
-			// notification
+			CONFIG::DESKTOP{
+				// 桌面 debug ，，要截图功能
+				ScreenshotHelper.init(stage);
+			}
 
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, onActive);
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, onDective);
