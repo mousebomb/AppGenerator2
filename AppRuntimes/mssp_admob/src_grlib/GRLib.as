@@ -6,7 +6,6 @@ package
 
 	import com.aoaogame.sdk.AnalysisManager;
 	import com.aoaogame.sdk.UMAnalyticsManager;
-	import com.aoaogame.sdk.adManager.MyAdManager;
 
 	import flash.desktop.NativeApplication;
 
@@ -16,6 +15,8 @@ package
 	import flash.events.KeyboardEvent;
 	import flash.system.Capabilities;
 	import flash.ui.Keyboard;
+
+	import org.mousebomb.AoaoSelfAd;
 
 	import org.mousebomb.DebugHelper;
 
@@ -63,7 +64,7 @@ package
 			//
 
 			// aoao Ad
-			MyAdManager.init(grConf.aoaoAppID, stage);
+			AoaoSelfAd.init(grConf.aoaoAppID, stage , AoaoSelfAd[grConf.moreClosePos]);
 			// aoao analysis
 			AnalysisManager.instance.setAnalytics(grConf.aoaoAppID, "com.aoaogame.game"+grConf.aoaoAppID+".analysis");
 			// UMAnalytics
@@ -139,12 +140,12 @@ package
 		private function onGengDuo( event:Event ):void
 		{
 			trace("GRLib/onGengDuo()");
-			MyAdManager.showAd( MyAdManager[grConf.moreClosePos] );
+			AoaoSelfAd.showAd(  );
 		}
 
 		public static function get showMoreBtn():Boolean
 		{
-			return MyAdManager.showMoreBtn;
+			return AoaoSelfAd.showMoreBtn;
 		}
 
 	}

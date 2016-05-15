@@ -36,7 +36,6 @@
     <extensionID>so.cuo.platform.baidussp</extensionID>
     <extensionID>so.cuo.platform.admob</extensionID>
     <extensionID>ane.ios.UMMobClickAne</extensionID>
-    <extensionID>com.juankpro.ane.LocalNotification</extensionID>
   </extensions>
   <icon>
     <image120x120>AppIcons/120.png</image120x120>

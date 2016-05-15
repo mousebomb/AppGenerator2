@@ -126,6 +126,8 @@ if(!$compileSucc)
             case 'ipa':
                 $genipa = PUBLISH_PATH . '/' . $template . '.ipa';
                 $genipaitc = PUBLISH_PATH . '/' . $template . '-iTC.ipa';
+                if(file_exists($genipa)) unlink($genipa);
+                if(file_exists($genipaitc)) unlink($genipaitc);
                 # 处理打包
                 if (file_exists($gen . "/build_ipa.txt")) {
                     $buildIpaCmd = file_get_contents($gen . "/build_ipa.txt");
@@ -185,6 +187,7 @@ if(!$compileSucc)
             case 'apk':
 
                 $genapk = PUBLISH_PATH . '/' . $template . '.apk';
+                if(file_exists($genapk)) unlink($genapk);
                 # 处理打包
                 $buildApkCmd = file_get_contents($gen . "/build_apk.txt");
                 $output = $buildApkCmd." ".$buildAddtionalCmd;

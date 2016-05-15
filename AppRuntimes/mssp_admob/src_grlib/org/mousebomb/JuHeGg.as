@@ -3,9 +3,8 @@
  */
 package org.mousebomb {
 
-import com.aoaogame.sdk.GlobalConfig;
 
-import flash.desktop.NativeApplication;
+	import flash.desktop.NativeApplication;
 
 import flash.events.Event;
 import flash.events.EventDispatcher;
@@ -14,7 +13,8 @@ import flash.net.URLLoader;
 import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
 import flash.net.URLRequestMethod;
-import flash.system.Capabilities;
+	import flash.net.URLVariables;
+	import flash.system.Capabilities;
 
 import org.mousebomb.DebugHelper;
 
@@ -56,6 +56,10 @@ public class JuHeGg extends EventDispatcher
 	// 单例
 	private static var _instance:JuHeGg;
 
+	/** 查询广告配置  http://www.aoaogame.com/s/get-aac.php?i=2&o=i&l=cn&v=1.0 */
+	public static var GET_APP_AD_CONF_URL:String = "http://www.aoaogame.com/s/get-aac.php";
+
+
 	public static function get instance():JuHeGg
 	{
 		if( _instance == null )
@@ -69,12 +73,22 @@ public class JuHeGg extends EventDispatcher
 			throw new Error( 'singleton' );
 	}
 
-	public static function isIOS():Boolean
+	public static function getLang():String
 	{
-		var isIOS:Boolean = Capabilities.os.indexOf( "iPhone" ) != -1;
-		if( Capabilities.os.indexOf( "iPad" ) != -1 )
-			isIOS = true;
-		return isIOS;
+		switch(Capabilities.language)
+		{
+			case "zh-CN":
+			case "zh-TW":
+				return 'cn';
+				break;
+			default:
+				return 'en';
+		}
+	}
+	public static function getOS():String
+	{
+		CONFIG::ANDROID{return "a";}
+		CONFIG::IOS{return "i";}
 	}
 
 
@@ -129,8 +143,14 @@ public class JuHeGg extends EventDispatcher
 		var descriptor:XML = NativeApplication.nativeApplication.applicationDescriptor;
 		var ns:Namespace = descriptor.namespaceDeclarations()[0];
 		var version:String = descriptor.ns::versionNumber.toString();
-		_request = new URLRequest( GlobalConfig.GET_AD_DATA_PHP_URL + "?i=" + _appID + "&o=" + Capabilities.os + "&l=" + Capabilities.language + "&v=" + version );
-		DebugHelper.log("?i=" + _appID + "&o=" + Capabilities.os + "&l=" + Capabilities.language + "&v=" + version);
+		_request = new URLRequest(GET_APP_AD_CONF_URL);
+		var vars :URLVariables = new URLVariables();
+		vars.i = _appID;
+		vars.o= getOS();
+		vars.l= getLang();
+		vars.v= version;
+		_request.data = vars;
+		DebugHelper.log(vars.toString());
 		_request.method = URLRequestMethod.GET;
 		_urlLoader = new URLLoader();
 		_urlLoader.dataFormat = URLLoaderDataFormat.TEXT;
@@ -141,7 +161,7 @@ public class JuHeGg extends EventDispatcher
 
 	private function onUrlLoadError( event:IOErrorEvent ):void
 	{
-		trace( "获得官网广告数据失败：" + event.text );
+		DebugHelper.log( "获得官网广告数据失败：" + event.text );
 		useDefaultKeys();
 		dispatchEvent( new Event( GET_DATA_FAIL ) );
 	}
@@ -158,7 +178,7 @@ public class JuHeGg extends EventDispatcher
 			// 有时候被电信劫持，导致拿到的数据不是json，要重试
 			if( ++tryLoadConfigTime > 2 )
 			{
-				trace( "官网数据无法解析:" + _urlLoader.data );
+				DebugHelper.log( "官网数据无法解析:" + _urlLoader.data );
 				dispatchEvent( new Event( GET_DATA_FAIL ) );
 			} else
 			{
@@ -170,34 +190,21 @@ public class JuHeGg extends EventDispatcher
 		if( _errorCode == SUCC )
 		{
 			//result   Array of  {"adtype":"ADMOB","bannerKey":"ca-app-pub-3981702146870599\/5554406619","bannerPercent":"0","interstitialPercent":"0","interstitialKey":"ca-app-pub-3981702146870599\/7031139812"}
-//				DebugHelper.log(_urlLoader.data);
-			var _adObjArr:Array = res.result;
-			for( var i:int = 0; i < _adObjArr.length; i++ )
-			{
-				var eachAdConfig:Object = _adObjArr[i];
-				var adtype = eachAdConfig.adtype;
-				var bannerKey = eachAdConfig.bannerKey;
-				var interstitialKey = eachAdConfig.interstitialKey;
-				var bannerPercent = eachAdConfig.bannerPercent;
-				var interstitialPercent = eachAdConfig.interstitialPercent;
-				if( adtype.toUpperCase() == "ADMOB" )
-				{
-					_admob.setKeys( bannerKey, interstitialKey );
-					_admobBannerPercent = bannerPercent;
-					_admobInterstitialPercent = interstitialPercent;
-					DebugHelper.log("_admobBannerPercent="+ _admobBannerPercent);
-					DebugHelper.log("_admobInterstitialPercent="+ _admobInterstitialPercent);
-					DebugHelper.log("_admob.setKeys( "+ bannerKey+", "+ interstitialKey+" );");
-				} else if( adtype.toUpperCase() == "BAIDU" )
-				{
-					_baiduBannerPercent = bannerPercent;
-					_baiduInterstitialPercent = interstitialPercent;
-					_baidu.setKeys( _defBaiduAppID, _defBaiduBannerId, _defBaiduInterstitialId );
-					DebugHelper.log("_baiduBannerPercent="+ _baiduBannerPercent);
-					DebugHelper.log("_baiduInterstitialPercent="+ _baiduInterstitialPercent);
-					DebugHelper.log("_baidu.setKeys( "+ _defBaiduAppID+", "+ _defBaiduBannerId+", "+ _defBaiduInterstitialId+" );");
-				}
-			}
+			DebugHelper.log(_urlLoader.data);
+			_admob.setKeys( _defAdmobBannerId, _defAdmobInterstitialId );
+			var baiduAppID :String = res.result.msspAppID;
+			var baiduBannerID :String = res.result.msspBannerID;
+			var baiduInterstitialID :String = res.result.msspInterstitialID;
+			_baidu.setKeys( baiduAppID, baiduBannerID, baiduInterstitialID );
+			_baiduBannerPercent= res.result.baiduBannerPercent;
+			_admobBannerPercent= res.result.admobBannerPercent;
+			_baiduInterstitialPercent= res.result.baiduInterstitialPercent;
+			_admobInterstitialPercent= res.result.admobInterstitialPercent;
+			DebugHelper.log("MSSPKey="+ baiduAppID+","+baiduBannerID+","+baiduInterstitialID);
+			DebugHelper.log("_admobInterstitialPercent="+ _admobInterstitialPercent);
+			DebugHelper.log("_baiduInterstitialPercent="+ _baiduInterstitialPercent);
+			DebugHelper.log("_admobBannerPercent="+ _admobBannerPercent);
+			DebugHelper.log("_baiduBannerPercent="+ _baiduBannerPercent);
 			cacheInterstitial();
 			dispatchEvent( new Event( GET_DATA_SUCCESS ) );
 		} else
@@ -242,6 +249,10 @@ public class JuHeGg extends EventDispatcher
 	{
 		if(shouldRestoreBanner) showBanner(bannerHorizontal,bannerVertical);
 		cacheInterstitial();
+	}
+	private function onSelfAdDismiss():void
+	{
+		onInterstitialDismissEvent(null);
 	}
 
 	// 开启过banner的话，就会一直恢复
@@ -293,9 +304,18 @@ public class JuHeGg extends EventDispatcher
 		}
 	}
 
-
+	//自家广告显示一次就不出了，标记
+	private var shaShown:Boolean = false;
 	public function showInterstitial():void
 	{
+		// 第一次优先显示自家广告；但只显示一次，之后除非手动点更多按钮，否则都是第三方广告
+		if( shaShown==false && AoaoSelfAd.hasAd && AoaoSelfAd.showMoreBtn )
+		{
+			AoaoSelfAd.showAd(onSelfAdDismiss);
+			shaShown = true;
+			hideBanner();
+			return ;
+		}
 		if(_admobInterstitialPercent==0 && _baiduInterstitialPercent==0) return;
 
 		var roll:int = Math.random()* (_admobInterstitialPercent+_baiduInterstitialPercent);
