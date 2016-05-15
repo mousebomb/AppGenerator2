@@ -109,12 +109,6 @@ new CopyFile($rt,$gen);
         }
     }
 # Icon 1024生成各种
-    $input1024Png = $autoFillData['ico1024'];
-
-    $saveFolderPath = $srcFolderPath;
-    @mkdir($saveFolderPath);
-
-    // 生成各个平台尺寸 App Icon
     $iconSet = array(
         29, 40, 50, 57, 58, 60, 72, 76, 80, 100, 114, 120, 144, 152 ,512,1024
         //android
@@ -126,12 +120,22 @@ new CopyFile($rt,$gen);
         // 联想
         ,256
     );
-
+    $input1024Png = $autoFillData['ico1024'];
     if(!empty($input1024Png))
     {
-        foreach ($iconSet as $iconSize) {
-            $eachImagePath = $icon . "/".$iconSize . ".png";
-            smart_resize_image($input1024Png, $iconSize, $iconSize, false, $eachImagePath);
+        $last1024MD5 = $autoFillData['ico1024md5'];
+        // 最近生成过，没改动就别重复生了
+        $new1024MD5 = md5_file($input1024Png);
+        if($last1024MD5 != $new1024MD5)
+        {
+            //md5不同，才生成图片
+            foreach ($iconSet as $iconSize) {
+                $eachImagePath = $icon . "/".$iconSize . ".png";
+                smart_resize_image($input1024Png, $iconSize, $iconSize, false, $eachImagePath);
+            }
+            //写入md5
+            $new1024MD5Arr = array("ico1024md5"=>$new1024MD5);
+            writeSeedByAppID($new1024MD5Arr,$appID);
         }
     }
 
