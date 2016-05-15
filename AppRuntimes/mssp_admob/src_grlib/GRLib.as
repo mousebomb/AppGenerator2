@@ -132,9 +132,7 @@ package
 		{
 			trace("GRLib/onBanner()");
 			if(isAdConfigLoading) return;
-			JuHeGg.instance.showBanner(JuHeGg.CENTER,
-					grConf.isBannerBottom?JuHeGg.BOTTOM:JuHeGg.TOP
-			);
+			JuHeGg.instance.showBanner( JuHeGg[grConf.bannerH],JuHeGg[grConf.bannerV] );
 		}
 
 		private function onGengDuo( event:Event ):void

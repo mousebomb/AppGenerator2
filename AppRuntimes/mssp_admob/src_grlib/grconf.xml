@@ -15,7 +15,8 @@
         iosUMeng = "${iosUMeng}"
 
         interstitialAdLevel="${interstitialAdLevel}"
-        isBannerBottom="${isBannerBottom}"
+        bannerV="${bannerV}"
+        bannerH="${bannerH}"
         moreClosePos="${moreClosePos}"
         appID="${appID}"
 

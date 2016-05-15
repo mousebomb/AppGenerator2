@@ -29,7 +29,8 @@ package
 		public var aoaoAppID : int ;
 
 		public var interstitialAdLevel:int;
-		public var isBannerBottom:Boolean ;
+		public var bannerV:String;
+		public var bannerH:String;
 		public var moreClosePos:String;
 
 		public var notificationTitle:String;
@@ -53,7 +54,8 @@ package
 			iosUMeng = x.@iosUMeng;
 			aoaoAppID = x.@appID;
 			interstitialAdLevel = x.@interstitialAdLevel;
-			isBannerBottom = x.@isBannerBottom == "true";
+			bannerH = x.@bannerH;
+			bannerV = x.@bannerV;
 			moreClosePos = x.@moreClosePos;
 
 			if (Capabilities.language == "zh-CN"
@@ -79,7 +81,8 @@ package
 			"iosUMeng="+iosUMeng+"\n"+
 			"aoaoAppID="+aoaoAppID+"\n"+
 			"interstitialAdLevel="+interstitialAdLevel+"\n"+
-			"isBannerBottom="+isBannerBottom+"\n"+
+			"bannerV="+bannerV+" "+
+			"bannerH="+bannerH+"\n"+
 			"moreClosePos="+moreClosePos+"\n"+
 			"notificationTitle="+notificationTitle+"\n"+
 			"notificationAction="+notificationAction+"\n"
