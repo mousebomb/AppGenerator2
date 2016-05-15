@@ -1,0 +1,2 @@
+# 需要上传的文件
+EmbedContent.swf

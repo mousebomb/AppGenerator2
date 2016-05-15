@@ -1,0 +1,14 @@
+${AMXMLC}
+    -output ${gen}/${main.swf}
+    -source-path=${gen}/src
+    -library-path+=${gen}/lib
+    -library-path+=${FLEX_HOME}/frameworks/locale/en_US
+    -target-player=17.0
+    -tools-locale=en
+    -debug=${debug}
+    -define+=CONFIG::DEBUG,${debug}
+    -define+=CONFIG::ANDROID,${apk}
+    -define+=CONFIG::IOS,${ipa}
+    -define+=CONFIG::DESKTOP,${desktop}
+    -warnings=false
+    ${gen}/src/KeH.as
