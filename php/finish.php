@@ -59,11 +59,21 @@ new CopyFile($rt,$gen);
     {
         $output = file_get_contents($gen."/".$eachReplaceFile);
         // 遍历 从填入的配置 替换到文件
-        foreach ($autoFillData as $autoFillKey => $autoFillVal)
+        $fillvarsList = getTemplateFillvarsList($autoFillData['template']);
+        foreach ($fillvarsList as $eachKey => $eachVO)
         {
-            $search = sprintf('${%s}',$autoFillKey);
-            $output = str_replace($search,$autoFillVal,$output);
+            $search = sprintf('${%s}',$eachKey);
+            $output = str_replace($search,$autoFillData[$eachKey],$output);
         }
+        $fillvarsList = getRuntimeFillvarsList($autoFillData['runtime']);
+        foreach ($fillvarsList as $eachKey => $eachVO)
+        {
+            $search = sprintf('${%s}',$eachKey);
+            $output = str_replace($search,$autoFillData[$eachKey],$output);
+        }
+        //appID替换
+        $search = '${appID}';
+        $output = str_replace($search,$appID,$output);
         // 遍历 从模板常量的配置 替换到文件
         foreach ($autoFillDataC as $autoFillKey => $autoFillVal)
         {
