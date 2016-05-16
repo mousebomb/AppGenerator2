@@ -1,0 +1,3 @@
+# replacelist 额外要填充的变量
+形状Masks:Masks=Mask1;Mask2;Mask3;Mask4;Mask5;Mask6;Mask7;Mask8;Mask9;Mask10;Mask11;Mask12;Mask13;
+形状总数:MaskNum=13
