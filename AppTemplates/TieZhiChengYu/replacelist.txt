@@ -1,0 +1,3 @@
+# 程序要替换的文本文件
+src/tiezhi/ChengYuTimu.as
+src/org/mousebomb/GameConf.as
