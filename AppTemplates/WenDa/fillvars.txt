@@ -1,0 +1,3 @@
+# replacelist 额外要填充的变量
+背景模式(1浮空，0地面）:bgMode=1
+铺设的背景:addTree=addTree(Tree1);addTree(Tree2);addTree(Tree3);
