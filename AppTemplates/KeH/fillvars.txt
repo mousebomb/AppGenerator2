@@ -3,3 +3,5 @@ Banner横向位置*:bannerH=RIGHT LEFT CENTER
 Banner纵向位置*:bannerV=TOP BOTTOM
 游戏宽度*:gameW=700
 游戏高度*:gameH=500
+广告关闭按钮位置*:moreClosePos=LEFT_DOWN LEFT_TOP RIGHT_TOP RIGHT_DOWN
+游戏方向*:aspectRatio=landscape portrait
