@@ -1,0 +1,7 @@
+# 需要上传的文件
+bgm.mp3
+timu
+lib/FishRole.swc
+lib/design.swc
+lib/Sfx.swc
+lib/pics.swc

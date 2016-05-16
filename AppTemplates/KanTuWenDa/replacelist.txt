@@ -1,0 +1,3 @@
+# 程序要替换的文本文件
+src/org/mousebomb/GameConf.as
+src/game/view/GameSceneBg.as
