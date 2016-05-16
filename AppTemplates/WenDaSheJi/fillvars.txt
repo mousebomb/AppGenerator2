@@ -1,0 +1,3 @@
+# replacelist 额外要填充的变量
+答题限时(秒):LEVEL_TIME=45
+回答对几题算过关:NUM_CORRECT2PASS=10
