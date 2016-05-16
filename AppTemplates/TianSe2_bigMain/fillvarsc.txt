@@ -1,0 +1,6 @@
+# 模板对runtime设置的固定参数 模板决定的常量（不需要用户填写）注意moreClosePos是LEFT|RIGHT _ TOP|DOWN
+renderMode=auto
+aspectRatio=portrait
+bannerH=CENTER
+bannerV=TOP
+moreClosePos=LEFT_DOWN
