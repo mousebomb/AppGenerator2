@@ -1,0 +1,4 @@
+# replacelist 额外要填充的变量
+场地名称*:YUCHANG_LABEL=渔场
+动物名称*:FISH_LABEL=鱼儿
+所有鱼的类名:Fishes=Fish1_1;Fish2_1;
