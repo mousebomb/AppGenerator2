@@ -33,7 +33,7 @@ package
 			SoundMan.playBgm("bgm.mp3");
 			//
 			_scene = new UIWelcome();
-			addChild(_scene);
+			rootView.addChild(_scene);
 			//
 			if(CONFIG::DEBUG)
 			{
@@ -46,9 +46,9 @@ package
 
 		public function replaceScene(scene : Sprite) : void
 		{
-			removeChild(_scene);
+			rootView.removeChild(_scene);
 			_scene = scene;
-			addChild(scene);
+			rootView.addChild(scene);
 		}
 	}
 }
