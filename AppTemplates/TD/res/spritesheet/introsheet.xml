@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:2c93e50d1c219a2c90706a95c6c12d66:1/1$ -->
+<TextureAtlas imagePath="introsheet.png">
+    <SubTexture name="BI1_1" x="222" y="2" width="216" height="192" frameX="-41" frameY="-50" frameWidth="300" frameHeight="376"/>
+    <SubTexture name="BI2_1" x="220" y="196" width="216" height="188" frameX="-41" frameY="-54" frameWidth="300" frameHeight="376"/>
+    <SubTexture name="BI3_1" x="2" y="192" width="216" height="190" frameX="-41" frameY="-51" frameWidth="300" frameHeight="376"/>
+    <SubTexture name="BI4_1" x="2" y="2" width="218" height="188" frameX="-39" frameY="-54" frameWidth="300" frameHeight="376"/>
+</TextureAtlas>

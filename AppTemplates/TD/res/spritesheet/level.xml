@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:4942b46ab74429c8fbf032071894725a:1/1$ -->
+<TextureAtlas imagePath="level.png">
+    <SubTexture name="L1" x="298" y="656" width="146" height="216"/>
+    <SubTexture name="L10" x="150" y="656" width="146" height="216"/>
+    <SubTexture name="L11" x="298" y="438" width="146" height="216"/>
+    <SubTexture name="L12" x="150" y="438" width="146" height="216"/>
+    <SubTexture name="L2" x="2" y="656" width="146" height="216"/>
+    <SubTexture name="L3" x="2" y="438" width="146" height="216"/>
+    <SubTexture name="L4" x="298" y="220" width="146" height="216"/>
+    <SubTexture name="L5" x="150" y="220" width="146" height="216"/>
+    <SubTexture name="L6" x="2" y="220" width="146" height="216"/>
+    <SubTexture name="L7" x="298" y="2" width="146" height="216"/>
+    <SubTexture name="L8" x="150" y="2" width="146" height="216"/>
+    <SubTexture name="L9" x="2" y="2" width="146" height="216"/>
+</TextureAtlas>
