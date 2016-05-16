@@ -106,6 +106,10 @@ package tiezhi
 		{
 			if (type == DRAG_SOURCE)
 			{
+				this.removeEventListener(MouseEvent.MOUSE_DOWN, onDown);
+				this.removeEventListener(MouseEvent.MOUSE_UP, onUp);
+				this.mouseEnabled=false;
+				this.mouseChildren=false;
 				TweenLite.to(this, 0.2, {alpha:0, onComplete:onSourceTweenComplete});
 			}
 			else if (type == HoleLi.DRAG_TARGET)
