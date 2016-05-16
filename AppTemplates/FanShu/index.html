@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h2>翻书看图</h2>
+<p>绘图和故事动画可以混用
+</p><p>
+    尺寸： 类似塔防 底图：768*1136。 注意左右64像素在手机上看不到，仅在pad上可见。
+
+</p>
+
+<h3>素材</h3>
+<ul>
+    <li>design.swc: 游戏界面 </li>
+    <li>res: 音乐、插图目录，里面可以放类似这样（音频／图片／目录）：
+        <ul>
+            <li>mulu.txt   <small>指定目录的显示名称</small></li>
+            <li>bgm.mp3 <small>(可有可无，有的话就是全局背景音乐)</small></li>
+            <li>1/
+                <ul>
+                    <li>1.png</li>
+                    <li>1.mp3</li>
+                    <li>2.jpg</li>
+                    <li>3.swf</li>
+                </ul>
+            </li>
+            <li>2/
+                <ul>
+                    <li>1.mp3</li>
+                    <li>1.png</li>
+                    <li>2.mp3</li>
+                    <li>2.png</li>
+                </ul>
+            </li>
+            <li>....</li>
+        </ul>
+
+        res内文件介绍：
+        <ul>
+            <li>其中图片可以是jpg或png格式，但必须小写文件名。
+                </li>
+            <li>                音频可以是mp3或wav格式，但建议用mp3。
+            </li>
+            <li>音频可以没有</li>
+            <li>mulu.txt很重要 里面写了每个文件的中文名，因为apk文件打包时不支持中文文件名，所以只能写一个配置来描写音频显示的中文名了。</li>
+            <li>目录如果只有1个，那么不会出现选择界面，而直接进内页翻看。</li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>
