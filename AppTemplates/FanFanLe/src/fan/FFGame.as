@@ -197,8 +197,8 @@ ui.timeTf.text ="0";
 		private function onBackClick(event : MouseEvent) : void
 		{
 			SoundMan.playSfx(SoundMan.BTN);
-			FanFanLe.instance.replaceScene(new FFLevel());
 			AoaoBridge.interstitial(this);
+			FanFanLe.instance.replaceScene(new FFLevel());
 		}
 
 		private function randomSort(elementA : Object, elementB : Object) : int
