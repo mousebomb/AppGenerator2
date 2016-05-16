@@ -120,8 +120,11 @@ import com.greensock.easing.Back;
 				var shelfLi : HoleLi = holeShelf.getChildAt(i) as HoleLi;
 				if (dragHoleLi.index == shelfLi.index)
 				{
-					var shelfLiPos : Point = shelfLi.localToGlobal(new Point());
-					var dragLiPos : Point = dragHoleLi.localToGlobal(new Point());
+					var shelfLiPos : Point = shelfLi.centerPos;
+					var dragLiPos : Point = dragHoleLi.centerPos;
+                    trace("mouseUp,shelfLiPos=",shelfLiPos,dragLiPos);
+                    trace("shelfLi",shelfLi.x ,shelfLi.y);
+                    trace("dragLiPos",dragHoleLi.x ,dragHoleLi.y);
 					var dist : Number = MousebombMath.distanceOf2Point(shelfLiPos, dragLiPos);
 					if (dist < 80)
 					{

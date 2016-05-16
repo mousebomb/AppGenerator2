@@ -1,0 +1,6 @@
+# 需要上传的文件
+bgm.mp3
+lib/pics.swc
+lib/design.swc
+lib/scenes.swc
+lib/Sfx.swc
