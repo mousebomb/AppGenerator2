@@ -1,0 +1,2 @@
+-C ${gen} pics
+-e ${gen}/bgm.mp3 bgm.mp3
