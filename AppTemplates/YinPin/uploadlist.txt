@@ -1,0 +1,4 @@
+# 需要上传的文件
+res
+lib/design.swc
+lib/Sfx.swc
