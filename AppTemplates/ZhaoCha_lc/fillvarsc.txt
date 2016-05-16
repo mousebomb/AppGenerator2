@@ -1,0 +1,6 @@
+# 模板对runtime设置的固定参数 模板决定的常量（不需要用户填写）
+renderMode=auto
+aspectRatio=portrait
+bannerH=CENTER
+bannerV=BOTTOM
+moreClosePos=RIGHT_TOP
