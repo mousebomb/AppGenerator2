@@ -20,6 +20,7 @@ package hdsj
 	import org.mousebomb.framework.Notify;
 	import org.mousebomb.structure.HashMap;
 	import org.mousebomb.utils.MappingObject;
+	import org.mousebomb.GameConf;
 
 	public class YuChangModel
 	{
@@ -449,7 +450,7 @@ package hdsj
 					return "";
 				}
 			}
-			return "鱼儿数量已到上限，请升级渔场养更多的鱼";
+			return GameConf.FISH_LABEL+"数量已到上限，请升级"+GameConf.YUCHANG_LABEL+"养更多的"+GameConf.FISH_LABEL;
 		}
 
 		/** 鱼池是否足够加鱼&&是否有钱买鱼 */
