@@ -26,23 +26,17 @@ $icon = $gen."/icon";
 @mkdir($icon);
 //assets目录 目前定死会自动添加,应该是检测uploadlist
 $assets = $gen."/assets";
-$lib = $gen."/lib";
-$src = $gen."/src";
-$src2 = $gen."/src_grlib";
 @mkdir($assets);
-// 如果有lib 先删除
-if(file_exists($lib) && is_dir($lib))
-{
-    delDirAndFile($lib);
-}
-// 如果有代码，先删除
-if(file_exists($src) && is_dir($src))
-{
-    delDirAndFile($src);
-}
-if(file_exists($src2) && is_dir($src2))
-{
-    delDirAndFile($src2);
+//删除各种遗留文件夹
+if ( $handle = opendir( $gen ) ) {
+    while (false !== ($item = readdir($handle))) {
+        if ($item != "." && $item != ".." && $item != "icon" && $item != "assets") {
+            if (is_dir("$gen/$item")) {
+                delDirAndFile("$gen/$item");
+            }
+        }
+    }
+    closedir($handle);
 }
 
 new CopyFile(GR_ROOT,$gen);
