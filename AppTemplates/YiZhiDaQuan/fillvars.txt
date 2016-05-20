@@ -1,0 +1,3 @@
+# replacelist 额外要填充的变量
+:PicList=Pic1;Pic2;
+:JbhPicList=JbhPic1;JbhPic2;
