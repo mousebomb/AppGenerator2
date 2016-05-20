@@ -265,10 +265,7 @@ public class P9Game extends Sprite implements IDispose,IFlyIn
             playWinEffect(levelModel.levelCount > levelModel.level );
             SoundMan.playSfx( SoundMan.PRIZE );
 
-            if( !CONFIG::DESKTOP )
-            {
-                AoaoBridge.interstitial(YiZhiDaQuan.instance);
-            }
+            AoaoBridge.interstitial(YiZhiDaQuan.instance);
         }else{
             unlock();
         }

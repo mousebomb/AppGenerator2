@@ -260,10 +260,7 @@ private var _shine:MovieClip;
 		private function onBackClick(event : MouseEvent) : void
 		{
 			YiZhiDaQuan.instance.replaceScene(new TZLevel());
-			if (!CONFIG::DEBUG)
-			{
-				AoaoBridge.interstitial(YiZhiDaQuan.instance);
-			}
+			AoaoBridge.interstitial(YiZhiDaQuan.instance);
 		}
 
 		private static var nextI : int = 1;

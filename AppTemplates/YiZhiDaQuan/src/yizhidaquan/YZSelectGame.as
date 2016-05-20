@@ -33,7 +33,15 @@ package yizhidaquan
 			ui.tiezhiBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
 			ui.fanBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
 			ui.pin9Btn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
+			//
+			ui.moreBtn.visible=AoaoBridge.isMoreBtnVisible;
+			ui.moreBtn.addEventListener(MouseEvent.CLICK, onMoreClick);
 
+		}
+
+		private function onMoreClick( event:MouseEvent ):void
+		{
+			AoaoBridge.gengDuo(YiZhiDaQuan.instance);
 		}
 
 		private function onJianbihuaClick( event:MouseEvent ):void
@@ -72,6 +80,7 @@ package yizhidaquan
 			ui.tiezhiBtn.removeEventListener(MouseEvent.CLICK, onJianbihuaClick);
 			ui.fanBtn.removeEventListener(MouseEvent.CLICK, onJianbihuaClick);
 			ui.pin9Btn.removeEventListener(MouseEvent.CLICK, onJianbihuaClick);
+			ui.moreBtn.removeEventListener(MouseEvent.CLICK, onMoreClick);
 		}
 
 		public function flyIn() : void

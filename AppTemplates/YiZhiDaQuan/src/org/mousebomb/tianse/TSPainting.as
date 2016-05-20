@@ -126,6 +126,8 @@ package org.mousebomb.tianse
 			stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp, true);
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
+			//
+			AoaoBridge.interstitial(YiZhiDaQuan.instance);
 		}
 
 		private function onBackClick(event : MouseEvent) : void
