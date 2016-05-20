@@ -133,7 +133,7 @@ package org.mousebomb.jianbihua {
 		private function onStage(event : Event) : void {
 			jbh.startPaint(levelModel.level);
 			this.removeEventListener(Event.ADDED_TO_STAGE, onStage);
-			AoaoBridge.banner(this);
+			AoaoBridge.banner(YiZhiDaQuan.instance);
 			//
 			SoundMan.playPic(levelModel.level);
         }
@@ -144,7 +144,7 @@ package org.mousebomb.jianbihua {
 		public function dispose() : void {
 			jbh.proxy.dispose();
 			// 广告
-			AoaoBridge.interstitial(this);
+			AoaoBridge.interstitial(YiZhiDaQuan.instance);
 		}
 	}
 }

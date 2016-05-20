@@ -145,7 +145,7 @@ public class P9Game extends Sprite implements IDispose,IFlyIn
             SoundMan.playSfx(SoundMan.GO);
         } , 1000);
         unlock();
-        AoaoBridge.banner(this);
+        AoaoBridge.banner(YiZhiDaQuan.instance);
     }
     private var thumb:P9MaskeredBitmap;
 
@@ -267,7 +267,7 @@ public class P9Game extends Sprite implements IDispose,IFlyIn
 
             if( !CONFIG::DESKTOP )
             {
-                AoaoBridge.interstitial(this);
+                AoaoBridge.interstitial(YiZhiDaQuan.instance);
             }
         }else{
             unlock();
@@ -301,7 +301,7 @@ public class P9Game extends Sprite implements IDispose,IFlyIn
 
     private function onBackClick( event:MouseEvent ):void
     {
-        AoaoBridge.interstitial(this);
+        AoaoBridge.interstitial(YiZhiDaQuan.instance);
         YiZhiDaQuan.instance.replaceScene( new P9Level() );
     }
 

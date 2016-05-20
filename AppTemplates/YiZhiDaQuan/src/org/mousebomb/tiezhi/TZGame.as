@@ -112,8 +112,7 @@ package org.mousebomb.tiezhi
 			{
 				animalSelectionFlyIn();
 			}
-            if( !CONFIG::DESKTOP )
-                AoaoBridge.banner(this);
+			AoaoBridge.banner(YiZhiDaQuan.instance);
 		}
 
 		// 判定是否拖拽到合适地点
@@ -176,7 +175,7 @@ private var _shine:MovieClip;
 
 				_delayWin  = true;
 
-				AoaoBridge.interstitial(this);
+				AoaoBridge.interstitial(YiZhiDaQuan.instance);
 			}
 			else
 			{
@@ -263,7 +262,7 @@ private var _shine:MovieClip;
 			YiZhiDaQuan.instance.replaceScene(new TZLevel());
 			if (!CONFIG::DEBUG)
 			{
-				AoaoBridge.interstitial(this);
+				AoaoBridge.interstitial(YiZhiDaQuan.instance);
 			}
 		}
 

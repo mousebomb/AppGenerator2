@@ -192,12 +192,12 @@ package org.mousebomb.tianse {
 		{
 //			this.y = -GameConf.VISIBLE_SIZE_H;
 //			TweenLite.to(this ,0.5 , {y:0 , ease:Back.easeOut ,onComplete:onFlyInComp});
-			AoaoBridge.interstitial(this);
+			AoaoBridge.interstitial(YiZhiDaQuan.instance);
 		}
 
 		private function onFlyInComp() : void
 		{
-			AoaoBridge.interstitial(this);
+			AoaoBridge.interstitial(YiZhiDaQuan.instance);
 		}
 
 		public function dispose() : void

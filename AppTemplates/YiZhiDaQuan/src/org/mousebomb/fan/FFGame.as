@@ -170,7 +170,7 @@ ui.timeTf.text ="0";
 			//
 			ui.bg.gotoAndStop(level);
 			//
-			AoaoBridge.banner(this);
+			AoaoBridge.banner(YiZhiDaQuan.instance);
 		}
 
 		// 获得 成对的pic
@@ -192,7 +192,7 @@ ui.timeTf.text ="0";
 		private function onBackClick(event : MouseEvent) : void
 		{
 			SoundMan.playSfx(SoundMan.BTN);
-			AoaoBridge.interstitial(this);
+			AoaoBridge.interstitial(YiZhiDaQuan.instance);
 			YiZhiDaQuan.instance.replaceScene(new FFLevel());
 		}
 
@@ -277,7 +277,7 @@ fanTimes =0;
                 playWinAnimation (levelModel.level < levelModel.levelCount);
 				levelModel.saveLevel(levelModel.level, 1);
 
-				AoaoBridge.interstitial(this);
+				AoaoBridge.interstitial(YiZhiDaQuan.instance);
 			}
 		}
     private function playWinAnimation( showNextBtn :Boolean ):void
