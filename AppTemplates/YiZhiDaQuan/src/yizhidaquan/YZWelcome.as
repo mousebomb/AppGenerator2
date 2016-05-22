@@ -10,7 +10,6 @@ package yizhidaquan
 	import org.mousebomb.IFlyIn;
 	import org.mousebomb.SoundMan;
 	import org.mousebomb.interfaces.IDispose;
-	import org.mousebomb.wenda.WDLevelModel;
 
 	public class YZWelcome extends Sprite implements IDispose,IFlyIn
 	{
@@ -18,7 +17,6 @@ package yizhidaquan
 		{
 
 			addChild(new UIWelcome());
-			WDLevelModel.getInstance();
 
 			this.addEventListener(MouseEvent.CLICK, onClickAnywhere);
 		}
