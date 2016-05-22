@@ -85,8 +85,9 @@ $autoFillData= readSeedByAppID($appID);
                         if($eachRuntimeFile == "." || $eachRuntimeFile=="..") continue;
                         if(!is_dir(RUNTIMES_ROOT."/".$eachRuntimeFile)) continue;
                         $runtimeName = $eachRuntimeFile;
+                        $isSelected = $eachRuntimeFile == $autoFillData['runtime'];
                         ?>
-                        <option value="<?php echo $runtimeName; ?>"><?php echo $runtimeName; ?></option>
+                        <option value="<?php echo $runtimeName; ?>" <?php  if($isSelected) echo "selected"; ?>><?php echo $runtimeName; ?></option>
                         <?php
                     }
 
