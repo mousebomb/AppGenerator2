@@ -15,8 +15,11 @@ package org.mousebomb.fan
 	import org.mousebomb.IFlyIn;
 	import org.mousebomb.SoundMan;
 	import org.mousebomb.interfaces.IDispose;
+	import org.mousebomb.pin9gong.P9Level;
 	import org.mousebomb.ui.Shelf;
 	import org.mousebomb.utils.FrameScript;
+
+	import yizhidaquan.YZModel;
 
 	import yizhidaquan.YiZhiDaQuan;
 
@@ -41,8 +44,9 @@ package org.mousebomb.fan
 		{
 			//
 			ui = new UIFFGame();
-			ui.nextBtn.visible = false;
+			nextBtnVisible=false;
 			ui.nextBtn.addEventListener(MouseEvent.CLICK, onNextBtnClick);
+			ui.nextGameBtn.addEventListener(MouseEvent.CLICK, onNextGameBtnClick);
 			ui.timeTf.text = "";
 			ui.win.visible = false;
 			addChild(ui);
@@ -71,7 +75,11 @@ package org.mousebomb.fan
 //			var strMin : String = int(sec / 60). toString();
 //			ui.timeTf.text = strMin + ":" + strSec;
 //		}
-
+		private function onNextGameBtnClick( event:MouseEvent ):void
+		{
+			SoundMan.playSfx(SoundMan.BTN);
+			YiZhiDaQuan.instance.replaceScene(new P9Level());
+		}
 		private function onNextBtnClick(event : MouseEvent) : void
 		{
 			SoundMan.playSfx(SoundMan.BTN);
@@ -157,12 +165,12 @@ trace("FFGame/setShelfSize()",shelfRect , "=" , GameConf.VISIBLE_SIZE_H_MINUS_AD
 			tmpSelectedCard = null;
 			isAnimationPlaying = false;
 			// ui
-			ui.nextBtn.visible = false;
+			nextBtnVisible=false;
 			ui.win.visible = false;
 //			timer.reset();
 //			timer.start();
-fanTimes =0;
-ui.timeTf.text ="0";
+			fanTimes =0;
+			ui.timeTf.text ="0";
 			//
 			var listData : Array = getCardPic(puzzleLeft) ;
 			listData.sort(randomSort);
@@ -171,6 +179,22 @@ ui.timeTf.text ="0";
 			ui.bg.gotoAndStop(level);
 			//
 			AoaoBridge.banner(YiZhiDaQuan.instance);
+		}
+		private function set nextBtnVisible( v:Boolean ):void
+		{
+			if(v)
+			{
+				if(levelModel.levelCount> levelModel.level )
+				{
+					ui.nextBtn.visible=true;
+					ui.nextGameBtn.visible=false;
+				}else{
+					ui.nextGameBtn.visible=true;
+					ui.nextBtn.visible=false;
+				}
+			}else{
+				ui.nextBtn.visible=ui.nextGameBtn.visible=false;
+			}
 		}
 
 		// 获得 成对的pic
@@ -282,17 +306,17 @@ fanTimes =0;
 		}
     private function playWinAnimation( showNextBtn :Boolean ):void
     {
-        ui.win.visible = true;
+		YZModel.getInstance().setPlayed(4);
+
+		ui.win.visible = true;
         ui.win.scaleX = ui.win.scaleY = 0.01;
 
         TweenLite.to(ui.win,1,{scaleX:1,scaleY:1,ease:Back.easeOut});
-        if(!showNextBtn) return;
         setTimeout(function():void
         {
-            ui.nextBtn.visible = true;
-            var oldY:Number = ui.nextBtn.y;
-            ui.nextBtn.y -=100;
-            TweenLite.to(ui.nextBtn,.8,{y:oldY,ease:Back.easeOut});
+			nextBtnVisible = true;
+            if(showNextBtn) TweenLite.from(ui.nextBtn,.8,{y:ui.nextBtn.y-100,ease:Back.easeOut});
+            else TweenLite.from(ui.nextGameBtn,.8,{y:ui.nextGameBtn.y-100,ease:Back.easeOut});
         },1200 );
     }
 

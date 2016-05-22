@@ -15,8 +15,11 @@ package org.mousebomb.tiezhi
 	import org.mousebomb.IFlyIn;
 	import org.mousebomb.Math.MousebombMath;
 	import org.mousebomb.SoundMan;
+	import org.mousebomb.fan.FFLevel;
 	import org.mousebomb.interfaces.IDispose;
 	import org.mousebomb.ui.Shelf;
+
+	import yizhidaquan.YZModel;
 
 	import yizhidaquan.YiZhiDaQuan;
 
@@ -45,8 +48,9 @@ package org.mousebomb.tiezhi
 			addChild(ui);
 
 			this.addEventListener(MouseEvent.MOUSE_DOWN, onWinDown);
-			ui.bottom.nextBtn.visible = false;
+			nextBtnVisible=false;
 			ui.bottom.nextBtn.addEventListener(MouseEvent.CLICK, onNextBtnClick);
+			ui.bottom.nextGameBtn.addEventListener(MouseEvent.CLICK, onNextGameBtnClick);
             //
 			levelModel = TZLevelModel.getInstance();
 			nextI = (levelModel.level-1) * TZLevelModel.BIRDSCOUNT_INLEVEL;
@@ -64,6 +68,12 @@ package org.mousebomb.tiezhi
 			//
 
 			changeLevel(levelModel.level);
+		}
+
+		private function onNextGameBtnClick( event:MouseEvent ):void
+		{
+			SoundMan.playSfx(SoundMan.BTN);
+			YiZhiDaQuan.instance.replaceScene(new FFLevel());
 		}
 
 		private function onWinDown(event : MouseEvent) : void
@@ -85,6 +95,22 @@ package org.mousebomb.tiezhi
 				changeLevel( levelModel.level );
 			}
 		}
+		private function set nextBtnVisible( v:Boolean ):void
+		{
+			if(v)
+			{
+				if(levelModel.levelCount> levelModel.level )
+				{
+					ui.bottom.nextBtn.visible=true;
+					ui.bottom.nextGameBtn.visible=false;
+				}else{
+					ui.bottom.nextGameBtn.visible=true;
+					ui.bottom.nextBtn.visible=false;
+				}
+			}else{
+				ui.bottom.nextBtn.visible=ui.bottom.nextGameBtn.visible=false;
+			}
+		}
 
 		public function changeLevel(level : int) : void
 		{
@@ -93,7 +119,7 @@ package org.mousebomb.tiezhi
 			_shine.stop();
 			// ui
 			ui.win.visible = false;
-			ui.bottom.nextBtn.visible = false;
+			nextBtnVisible = false;
 			//
 			levelModel = TZLevelModel.getInstance();
 			nextI = (levelModel.level-1) * TZLevelModel.NEWBIRDSCOUNT_INLEVEL;
@@ -140,7 +166,7 @@ package org.mousebomb.tiezhi
 				}
 			}
 		}
-private var _shine:MovieClip;
+		private var _shine:MovieClip;
 		/**
 		 * 玩家拖拽正确啦
 		 */
@@ -171,7 +197,6 @@ private var _shine:MovieClip;
 				levelModel.saveLevel(levelModel.level, 1);
 				// 根据是否还有下一关 出不出下一关按钮
                 playWinEffect(levelModel.levelCount> levelModel.level);
-//				ui.bottom.nextBtn.visible =  (levelModel.levelCount> levelModel.level );
 
 				_delayWin  = true;
 
@@ -185,16 +210,13 @@ private var _shine:MovieClip;
 		}
         private function playWinEffect( showNextBtn :Boolean ):void
         {
-            if(showNextBtn)
-            {
-                setTimeout(function():void
+			YZModel.getInstance().setPlayed(3);
+			setTimeout(function():void
                 {
-                    ui.bottom.nextBtn.visible = true;
-                    var oldY:Number = ui.bottom.nextBtn.y;
-                    ui.bottom.nextBtn.y +=200;
-                    TweenLite.to(ui.bottom.nextBtn,.8,{y:oldY,ease:Back.easeOut});
+					nextBtnVisible = true;
+                    if(showNextBtn) TweenLite.from(ui.bottom.nextBtn,.8,{y:ui.bottom.nextBtn.y+200,ease:Back.easeOut});
+					else TweenLite.from(ui.bottom.nextGameBtn,.8,{y:ui.bottom.nextGameBtn.y+200,ease:Back.easeOut});
                 },1200 );
-            }
         }
 
 		// 点击关闭win窗口提示后 再胜利

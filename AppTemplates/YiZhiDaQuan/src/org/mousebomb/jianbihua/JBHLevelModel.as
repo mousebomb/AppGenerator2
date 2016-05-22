@@ -30,6 +30,10 @@ package org.mousebomb.jianbihua
  */
 		public var level : int;
 
+		public function hasNextLevel():Boolean
+		{
+			return level < levels.length;
+		}
 		/**
 		 * 所有关卡
 		 */

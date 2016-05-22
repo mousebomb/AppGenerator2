@@ -16,7 +16,6 @@ package yizhidaquan
 	import org.mousebomb.tianse.TSLevel;
 
 	import org.mousebomb.tiezhi.TZLevel;
-	import org.mousebomb.wenda.WDLevel;
 
 	public class YZSelectGame extends Sprite implements IDispose,IFlyIn
 	{
@@ -27,12 +26,18 @@ package yizhidaquan
 			ui = new UISelectGame();
 			addChild(ui);
 
+			var playedIndex : int = YZModel.getInstance().getPlayedIndex();
 			ui.backBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
-			ui.jianbihuaBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
 			ui.tianseBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
-			ui.tiezhiBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
-			ui.fanBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
-			ui.pin9Btn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
+			ui.tianseBtn.gotoAndStop( 2 );
+			ui.jianbihuaBtn.gotoAndStop( playedIndex>0?2:1);
+			ui.tiezhiBtn.gotoAndStop( playedIndex>1?2:1);
+			ui.fanBtn.gotoAndStop( playedIndex>2?2:1);
+			ui.pin9Btn.gotoAndStop( playedIndex>3?2:1);
+			if(playedIndex>0) ui.jianbihuaBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
+			if(playedIndex>1) ui.tiezhiBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
+			if(playedIndex>2) ui.fanBtn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
+			if(playedIndex>3) ui.pin9Btn.addEventListener(MouseEvent.CLICK, onJianbihuaClick);
 			//
 			ui.moreBtn.visible=AoaoBridge.isMoreBtnVisible;
 			ui.moreBtn.addEventListener(MouseEvent.CLICK, onMoreClick);
@@ -53,7 +58,6 @@ package yizhidaquan
 				case ui.backBtn:
 					YiZhiDaQuan.instance.replaceScene(new YZWelcome());
 					break;
-
 				case ui.jianbihuaBtn:
 					YiZhiDaQuan.instance.replaceScene(new JBHLevel());
 					break;

@@ -12,7 +12,10 @@ package org.mousebomb.jianbihua {
 	import org.mousebomb.IFlyIn;
 	import org.mousebomb.SoundMan;
 	import org.mousebomb.interfaces.IDispose;
+	import org.mousebomb.tiezhi.TZLevel;
 	import org.mousebomb.ui.Shelf;
+
+	import yizhidaquan.YZModel;
 
 	import yizhidaquan.YiZhiDaQuan;
 
@@ -51,6 +54,9 @@ package org.mousebomb.jianbihua {
 			ui.bottom.size3.addEventListener(MouseEvent.CLICK, onSizeBtnClick);
 			ui.saveBtn.visible = CameraRoll.supportsAddBitmapData;
 			ui.saveBtn.addEventListener(MouseEvent.CLICK, onSaveClick);
+			ui.nextBtn.addEventListener(MouseEvent.CLICK, onNextBtnClick);
+			ui.nextGameBtn.addEventListener(MouseEvent.CLICK, onNextGameClick);
+			nextBtnVisible=false;
 
 			// 画布
 			jbh.y = ui.top.height;
@@ -66,15 +72,48 @@ package org.mousebomb.jianbihua {
 				this.addEventListener(Event.ADDED_TO_STAGE, onStage);
 			}
 		}
+
+		private function onNextGameClick( event:MouseEvent ):void
+		{
+			SoundMan.playSfx(SoundMan.BTN);
+			YiZhiDaQuan.instance.replaceScene(new TZLevel());
+		}
+
+		private function onNextBtnClick( event:MouseEvent ):void
+		{
+			SoundMan.playSfx(SoundMan.BTN);
+			JBHLevelModel.getInstance().level += 1;
+			YiZhiDaQuan.instance.replaceScene(new JBHGame());
+		}
+
+		private function set nextBtnVisible( v:Boolean ):void
+		{
+			if(v)
+			{
+				if(JBHLevelModel.getInstance().hasNextLevel())
+				{
+					ui.nextBtn.visible=true;
+					ui.nextGameBtn.visible=false;
+				}else{
+					ui.nextGameBtn.visible=true;
+					ui.nextBtn.visible=false;
+				}
+			}else{
+				ui.nextBtn.visible=ui.nextGameBtn.visible=false;
+			}
+		}
 		
 		private function onPaintChanged():void
 		{
 			ui.saveBtn.visible = true;
+			nextBtnVisible=false;
+			YZModel.getInstance().setPlayed(2);
 		}
 
 		private function onSaveClick(event : MouseEvent) : void {
 			ui.saveBtn.visible = false;
 			jbh.save();
+			nextBtnVisible=true;
 		}
 
 		private function onSizeBtnClick(event : MouseEvent) : void {

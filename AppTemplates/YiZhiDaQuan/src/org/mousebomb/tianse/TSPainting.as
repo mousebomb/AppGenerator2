@@ -23,6 +23,9 @@ package org.mousebomb.tianse
 	import org.mousebomb.*;
 	import org.mousebomb.interactive.MouseDrager;
 	import org.mousebomb.interfaces.IDispose;
+	import org.mousebomb.jianbihua.JBHLevel;
+
+	import yizhidaquan.YZModel;
 
 	import yizhidaquan.YiZhiDaQuan;
 
@@ -102,15 +105,57 @@ package org.mousebomb.tianse
 			s.addEventListener(MouseEvent.MOUSE_UP, onClickEnd);
 			ui.backBtn.addEventListener(MouseEvent.CLICK, onBackClick);
 			ui.soundBtn.addEventListener(MouseEvent.CLICK, onSoundClick);
+			ui.nextBtn.addEventListener(MouseEvent.CLICK, onNextBtnClick);
+			ui.nextGameBtn.addEventListener(MouseEvent.CLICK, onNextGameClick);
+			nextBtnVisible=true;
 
 			//
 			addEventListener(Event.ADDED_TO_STAGE, onStage);
 			Multitouch.inputMode = MultitouchInputMode.GESTURE;
-			
+
 			//
 			SoundMan.playPic(_id);
 
 			lastInstance = this;
+		}
+
+		private function onNextBtnClick( event:MouseEvent ):void
+		{
+			checkSaveThis();
+			YiZhiDaQuan.instance.replaceScene(new TSPainting(_id+1));
+		}
+
+		private function onNextGameClick( event:MouseEvent ):void
+		{
+			checkSaveThis();
+			YiZhiDaQuan.instance.replaceScene(new JBHLevel());
+		}
+
+		private function checkSaveThis():void
+		{
+			if (_painted.modified)
+			{
+				_painted.save(_id);
+				YZModel.getInstance().setPlayed(1);
+			}
+		}
+		private function set nextBtnVisible( v:Boolean ):void
+		{
+			if( v )
+			{
+				if( _id < GameConf.TS_PIC_NUM )
+				{
+					ui.nextBtn.visible = true;
+					ui.nextGameBtn.visible = false;
+				} else
+				{
+					ui.nextGameBtn.visible = true;
+					ui.nextBtn.visible = false;
+				}
+			} else
+			{
+				ui.nextBtn.visible = ui.nextGameBtn.visible = false;
+			}
 		}
 
 		private function onSoundClick(event : MouseEvent) : void
@@ -137,9 +182,8 @@ package org.mousebomb.tianse
 
 		private function backToMain() : void
 		{
-			if (_painted.modified)
-				_painted.save(_id);
-//			TweenLite.to(this , .5 , {y:GameConf.VISIBLE_SIZE_H , ease:Back.easeIn, onComplete:onFlyOutComp});
+			checkSaveThis();
+			//			TweenLite.to(this , .5 , {y:GameConf.VISIBLE_SIZE_H , ease:Back.easeIn, onComplete:onFlyOutComp});
 			this.mouseEnabled = this.mouseChildren = false;
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
 			SoundMan.playSfx(SoundMan.BTN);
