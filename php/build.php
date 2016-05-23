@@ -171,9 +171,12 @@ if(!$compileSucc)
                                 $tabIndex = strpos($deviceRawData, "\t");
                                 $deviceID = substr($deviceRawData, 0, $tabIndex);
                                 echo("<pre>已发现iOS设备" . $deviceID . "</pre>");
+                                $uninstallCmd = ADT . " -uninstallApp -platform ios -device " . $deviceID . " -appid " . $autoFillData['buneleID'];
                                 $installCmd = ADT . " -installApp -platform ios -device " . $deviceID . " -package " . $genipa;
-                                if (!empty($deviceID))
-                                    execCmd($installCmd);
+                                if (!empty($deviceID)) {
+                                    exec($uninstallCmd);
+                                    execCmd($installCmd,"安装到手机");
+                                }
                             }
                         }
                     } else {
@@ -200,9 +203,12 @@ if(!$compileSucc)
                 execCmd($output, "打包apk");
 
                 # 尝试安装到手机
-                if ($install == 1)
+                if ($install == 1) {
+                    exec(FLEX_HOME . "/lib/android/bin/adb uninstall "." air." . $autoFillData['buneleID']);
+                    exec(FLEX_HOME . "/lib/android/bin/adb uninstall ". $autoFillData['buneleID']);
                     execCmd(FLEX_HOME . "/lib/android/bin/adb install -r " . $genapk, "尝试安装到手机");
-                //            execCmd(APP_ROOT."/util/adb install -r ".$genapk,"尝试安装到手机");
+                    //            execCmd(APP_ROOT."/util/adb install -r ".$genapk,"尝试安装到手机");
+                }
 
                 break;
         }
