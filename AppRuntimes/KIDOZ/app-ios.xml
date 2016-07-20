@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/20.0">
+  <id>${buneleID}</id>
+  <filename>Game</filename>
+  <name>
+      <text xml:lang="zh_Hans">${zhName}</text>
+      <text xml:lang="zh_Hant">${twName}</text>
+      <text xml:lang="zh-CN">${zhName}</text>
+      <text xml:lang="zh-TW">${twName}</text>
+      <text xml:lang="en">${enName}</text>
+  </name>
+  <versionNumber>${version}</versionNumber>
+  <versionLabel>${version}</versionLabel>
+  <initialWindow>
+    <content>GRRootIOS.swf</content>
+    <aspectRatio>${aspectRatio}</aspectRatio>
+    <fullScreen>true</fullScreen>
+    <autoOrients>true</autoOrients>
+    <visible>true</visible>
+    <renderMode>${renderMode}</renderMode>
+  </initialWindow>
+  <iPhone>
+    <InfoAdditions><![CDATA[<key>UIDeviceFamily</key>
+  <array>
+    <string>1</string>
+    <string>2</string>
+  </array>
+  <key>NSAppTransportSecurity</key>
+          <dict>
+           <key>NSAllowsArbitraryLoads</key>
+           <true/>
+          </dict>
+  <key>UIStatusBarStyle</key>
+  <string>UIStatusBarStyleBlackOpaque</string>
+  <key>UIRequiresPersistentWiFi</key>
+  <string>YES</string>]]></InfoAdditions>
+    <requestedDisplayResolution>high</requestedDisplayResolution>
+  </iPhone>
+  <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
+  <extensions>
+    <extensionID>com.kidoz.sdk.api.platforms</extensionID>
+  </extensions>
+  <icon>
+    <image120x120>AppIcons/120.png</image120x120>
+    <image152x152>AppIcons/152.png</image152x152>
+    <image60x60>AppIcons/60.png</image60x60>
+    <image57x57>AppIcons/57.png</image57x57>
+    <image512x512>AppIcons/512.png</image512x512>
+    <image144x144>AppIcons/144.png</image144x144>
+    <image80x80>AppIcons/80.png</image80x80>
+    <image76x76>AppIcons/76.png</image76x76>
+    <image40x40>AppIcons/40.png</image40x40>
+    <image1024x1024>AppIcons/1024.png</image1024x1024>
+    <image114x114>AppIcons/114.png</image114x114>
+    <image72x72>AppIcons/72.png</image72x72>
+    <image50x50>AppIcons/50.png</image50x50>
+    <image58x58>AppIcons/58.png</image58x58>
+    <image29x29>AppIcons/29.png</image29x29>
+    <image100x100>AppIcons/100.png</image100x100>
+  </icon>
+</application>
+

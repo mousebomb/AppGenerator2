@@ -1,0 +1,22 @@
+${ADT}
+-package
+-target apk-captive-runtime
+-storetype pkcs12
+-keystore ${KEYSTORE}
+-storepass ilikeasp
+ ${genapk}
+ ${gen}/app-android.xml
+-C ${gen} GRRootAndroid.swf
+-C ${gen} grlib.dat
+-C ${gen} main.dat
+-C ${gen}/assets Default-568h@2x.png
+-C ${gen}/assets Default@2x.png
+-C ${gen}/assets Default~ipad.png
+-e ${icon}/36.png AppIcons/36x36-36.png
+-e ${icon}/48.png AppIcons/48x48-48.png
+-e ${icon}/72.png AppIcons/72x72-72.png
+-e ${icon}/96.png AppIcons/96x96-96.png
+-e ${icon}/144.png AppIcons/144x144-144.png
+-e ${icon}/192.png AppIcons/192x192-192.png
+-C ${gen}/lib/biduad_plugin __pasys_remote_banner.jar
+-extdir ${gen}/lib

@@ -1,0 +1,32 @@
+${ADT}
+-package
+-target ipa-test-interpreter
+-storetype pkcs12
+-keystore ${KEYSTORE_IOS}
+-storepass aoaogame
+-provisioning-profile ${gen}/release.mobileprovision
+ ${genipa}
+ ${gen}/app-ios.xml
+-C ${gen} GRRootIOS.swf
+-C ${gen} grlib.dat
+-C ${gen} main.dat
+-C ${gen}/assets Default-568h@2x.png
+-C ${gen}/assets Default@2x.png
+-C ${gen}/assets Default~ipad.png
+-e ${icon}/120.png AppIcons/120.png
+-e ${icon}/152.png AppIcons/152.png
+-e ${icon}/60.png AppIcons/60.png
+-e ${icon}/57.png AppIcons/57.png
+-e ${icon}/512.png AppIcons/512.png
+-e ${icon}/144.png AppIcons/144.png
+-e ${icon}/80.png AppIcons/80.png
+-e ${icon}/76.png AppIcons/76.png
+-e ${icon}/40.png AppIcons/40.png
+-e ${icon}/1024.png AppIcons/1024.png
+-e ${icon}/114.png AppIcons/114.png
+-e ${icon}/72.png AppIcons/72.png
+-e ${icon}/50.png AppIcons/50.png
+-e ${icon}/58.png AppIcons/58.png
+-e ${icon}/29.png AppIcons/29.png
+-e ${icon}/100.png AppIcons/100.png
+-extdir ${gen}/lib

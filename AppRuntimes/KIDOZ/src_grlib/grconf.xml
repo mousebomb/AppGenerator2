@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conf
+        iosBaiduAppID="${iosBaiduAppID}"
+        iosBaiduBanner="${iosBaiduBanner}"
+        iosBaiduInterstitial="${iosBaiduInterstitial}"
+        androidBaiduAppID="${androidBaiduAppID}"
+        androidBaiduBanner="${androidBaiduBanner}"
+        androidBaiduInterstitial="${androidBaiduInterstitial}"
+
+        iosAdmobBanner="${iosAdmobBanner}"
+        iosAdmobInterstitial="${iosAdmobInterstitial}"
+        androidAdmobBanner="${androidAdmobBanner}"
+        androidAdmobInterstitial="${androidAdmobInterstitial}"
+
+        iosUMeng = "${iosUMeng}"
+
+        interstitialAdLevel="${interstitialAdLevel}"
+        bannerV="${bannerV}"
+        bannerH="${bannerH}"
+        moreClosePos="${moreClosePos}"
+        appID="${appID}"
+
+        notificationTitleEn="${notificationTitleEn}"
+        notificationTitle="${notificationTitle}"
+        notificationActionEn="${notificationActionEn}"
+        notificationAction="${notificationAction}"
+        >
+</conf>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/20.0">
+  <id>${buneleID}</id>
+  <filename>Game</filename>
+  <name>
+    <text xml:lang="zh_Hans">${zhName}</text>
+    <text xml:lang="zh_Hant">${twName}</text>
+    <text xml:lang="zh-CN">${zhName}</text>
+    <text xml:lang="zh-TW">${twName}</text>
+    <text xml:lang="en">${enName}</text>
+  </name>
+  <versionNumber>${version}</versionNumber>
+  <versionLabel>${version}</versionLabel>
+  <initialWindow>
+    <content>GRRootAndroid.swf</content>
+    <aspectRatio>${aspectRatio}</aspectRatio>
+    <fullScreen>true</fullScreen>
+    <autoOrients>false</autoOrients>
+    <visible>true</visible>
+    <renderMode>${renderMode}</renderMode>
+  </initialWindow>
+  <android>
+    <manifestAdditions><![CDATA[<manifest android:installLocation="preferExternal">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-configuration android:reqFiveWayNav="true" />
+    <supports-screens android:normalScreens="true" />
+    <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch" />
+    <application android:enabled="true" android:debuggable="false"  android:hardwareAccelerated="true">
+      <activity android:excludeFromRecents="false">
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+
+            <activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
+                      android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
+                    </activity>
+
+                <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
+                    <intent-filter>
+                        <action android:name="android.intent.action.PACKAGE_ADDED" />
+                        <data android:scheme="package" />
+                    </intent-filter>
+                </receiver>
+
+    </application>
+	    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.VIBRATE"/>
+
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    	<uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+    
+  </manifest>]]></manifestAdditions>
+  </android>
+  <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
+  <extensions>
+      <extensionID>org.mousebomb.ane.getsignhash</extensionID>
+      <extensionID>com.juankpro.ane.LocalNotification</extensionID>
+      <extensionID>com.kidoz.sdk.api.platforms</extensionID>
+      <extensionID>com.support.v4.air.extension</extensionID>
+  </extensions>
+  <icon>
+    <image144x144>AppIcons/144x144-144.png</image144x144>
+    <image72x72>AppIcons/72x72-72.png</image72x72>
+    <image48x48>AppIcons/48x48-48.png</image48x48>
+    <image36x36>AppIcons/36x36-36.png</image36x36>
+    <image96x96>AppIcons/96x96-96.png</image96x96>
+      <image192x192>AppIcons/192x192-192.png</image192x192>
+  </icon>
+</application>
+
