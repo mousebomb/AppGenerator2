@@ -21,7 +21,8 @@ import org.mousebomb.DebugHelper;
 import so.cuo.platform.admob.Admob;
 import so.cuo.platform.admob.AdmobEvent;
 import so.cuo.platform.admob.AdmobPosition;
-import so.cuo.platform.baidu.BaiDu;
+	import so.cuo.platform.admob.AdmobSize;
+	import so.cuo.platform.baidu.BaiDu;
 import so.cuo.platform.baidu.BaiDuAdEvent;
 import so.cuo.platform.baidu.BaiDuSize;
 import so.cuo.platform.baidu.RelationPosition;
@@ -283,7 +284,7 @@ public class JuHeGg extends EventDispatcher
 //			_baidu.showBanner( BaiDu.BANNER, RelationPosition.BOTTOM_CENTER );
 			DebugHelper.log("_baidu.showBanner()");
 		}else{
-			_admob.showBanner( Admob.BANNER,AdmobPosition[vertical + "_" + horizontal]);
+			_admob.showBanner( AdmobSize.SMART_BANNER,AdmobPosition[vertical + "_" + horizontal]);
 			DebugHelper.log("_admob.showBanner()");
 		}
 		shouldRestoreBanner = true;
