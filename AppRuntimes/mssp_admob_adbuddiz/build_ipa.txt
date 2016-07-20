@@ -1,6 +1,7 @@
 ${ADT}
 -package
 -target ipa-test-interpreter
+-hideAneLibSymbols yes
 -storetype pkcs12
 -keystore ${KEYSTORE_IOS_DEV}
 -storepass aoaogame

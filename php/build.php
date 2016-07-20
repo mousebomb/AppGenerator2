@@ -56,7 +56,7 @@ if($type == "desktop")
 </head>
 <body>
 <div id="project-menu">
-    <?php echo $autoFillData['zhName'] . "(".$template.")"; ?>
+    <?php echo $autoFillData['zhName'] . "(".$autoFillData['template']." + ".$autoFillData['runtime'].")"; ?>
     <a href="./create.php">创建新App</a>
     <a href="./list.php">App列表</a>
 </div>
