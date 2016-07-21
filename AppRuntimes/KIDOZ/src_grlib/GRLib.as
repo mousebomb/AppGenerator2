@@ -63,6 +63,10 @@ package
 				UMAnalyticsManager.instance.startWithAppkey(grConf.iosUMeng);
 				UMAnalyticsManager.instance.startSession();
 			}
+			CONFIG::ANDROID
+			{
+				Umeng.getInstance().onResume();
+			}
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, onDective);
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, onActive);
 			//NOTIFICATION
@@ -117,30 +121,32 @@ package
 
 		private function showInterstitial( now:Date ):void
 		{
-				if(controller.getIsInterstitialLoaded())
-				{
-					controller.showInterstitialView();
-					lastInterstitialDisplayedTime= now;
-					DebugHelper.log("showInterstitial");
-				}
-				else
-				{
-					DebugHelper.log("loadInter");
-					controller.loadInterstitialView(false);
-				}
+			if( controller.getIsInterstitialLoaded() )
+			{
+				controller.showInterstitialView();
+				lastInterstitialDisplayedTime = now;
+				DebugHelper.log( "showInterstitial" );
+			} else
+			{
+				DebugHelper.log( "loadInter" );
+				controller.loadInterstitialView( false );
+			}
 		}
 
 		private function onBanner( event:Event ):void
 		{
 			trace("GRLib/onBanner()");
 
-			/** Add feed Panel to View  */
-			controller.addPanleView(grConf.panelType,grConf.handlePosition);
-
-			/** Set desired panel color (Optional) */
+			CONFIG::ANDROID{
+				controller.addPanleView(grConf.panelType,grConf.handlePositionAndroid);
+				//安卓上还有banner
+				controller.addBannerView(grConf.bannerPosition);
+			}
+			CONFIG::IOS{
+				//iOS上必须在下方
+				controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,grConf.handlePositionIOS);
+			}
 			controller.setPanelViewColor(grConf.panelColor);
-			//安卓上还有banner
-			controller.addBannerView(grConf.bannerPosition);
 
 		}
 

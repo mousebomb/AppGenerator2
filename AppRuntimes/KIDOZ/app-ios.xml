@@ -35,7 +35,7 @@
   <key>UIRequiresPersistentWiFi</key>
   <string>YES</string>
   <key>MinimumOSVersion</key>
-  <string>7.1</string>
+  <string>8.0</string>
   ]]></InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>

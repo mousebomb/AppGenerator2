@@ -4,3 +4,7 @@ aspectRatio=portrait
 bannerH=CENTER
 bannerV=BOTTOM
 moreClosePos=RIGHT_TOP
+panelType=1
+handlePositionAndroid=1
+handlePositionIOS=2
+bannerPosition=1

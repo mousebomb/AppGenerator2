@@ -7,7 +7,8 @@
 
         interstitialAdCd="${interstitialAdCd}"
         panelType="${panelType}"
-        handlePosition="${handlePosition}"
+        handlePositionAndroid="${handlePositionAndroid}"
+        handlePositionIOS="${handlePositionIOS}"
         panelColor="${panelColor}"
         bannerPosition="${bannerPosition}"
         appID="${appID}"

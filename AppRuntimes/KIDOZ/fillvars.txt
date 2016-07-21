@@ -8,10 +8,7 @@
 统计ID-安卓:androidUMeng=53b8c81d56240b1d3405f238
 KIDOZ-PublisherID:KIDOZ_PUBLISHERID=11767
 KIDOZ-TOKEN:KIDOZ_SECURITY_TOKEN=9EOHNIwFkJmfXk0geftp5eJtdH06bUZB
-KIDOZ-panel下上左右:panelType=0
-KIDOZ-panel位置:handlePosition=2
 KIDOZ-panel颜色:panelColor=#FF9F3087
-KIDOZ-banner位置⬆️⬇️↖️↗️↙️↘️:bannerPosition=1
 KIDOZ显示插屏的最小时间间隔(秒)*:interstitialAdCd=30
 通知标题 *:notificationTitle=一起来开动脑筋
 通知标题（英文） *:notificationTitleEn=Let us play

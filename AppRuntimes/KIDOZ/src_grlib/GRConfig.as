@@ -23,9 +23,10 @@ package
 		//秒
 		public var interstitialAdCd:int;
 		public var panelType:int;
-		public var handlePosition:int;
+		public var handlePositionAndroid:int;
 		public var panelColor:String;
 		public var bannerPosition:int;
+		public var handlePositionIOS:int;
 
 		public var notificationTitle:String;
 		public var notificationAction:String;
@@ -40,7 +41,8 @@ package
 			aoaoAppID = x.@appID;
 			interstitialAdCd = x.@interstitialAdCd;
 			panelType = x.@panelType;
-			handlePosition = x.@handlePosition;
+			handlePositionAndroid = x.@handlePositionAndroid;
+			handlePositionIOS = x.@handlePositionIOS;
 			panelColor = x.@panelColor;
 			bannerPosition = x.@bannerPosition;
 
@@ -60,7 +62,7 @@ package
 			"aoaoAppID="+aoaoAppID+"\n"+
 			"interstitialAdCd="+interstitialAdCd+"\n"+
 			"panelType="+panelType+"\n"+
-			"handlePosition="+handlePosition+" "+
+			"handlePositionAndroid="+handlePositionAndroid+" "+
 			"panelColor="+panelColor+" "+
 			"notificationTitle="+notificationTitle+"\n"+
 			"notificationAction="+notificationAction+"\n"
