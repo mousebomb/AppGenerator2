@@ -22,6 +22,7 @@ package
 
 	import org.mousebomb.JuHeGg;
 	import org.mousebomb.NotificationPush;
+	import org.mousebomb.ane.umeng.Umeng;
 
 	/**
 	 * 此类提供各种功能，比如广告展示，更多广告，统计，通知等
@@ -75,18 +76,26 @@ package
 			}
 			CONFIG::ANDROID
 			{
-				UMAnalyticsManager.instance.startSession();
+				Umeng.getInstance().onResume();
 			}
+			//
+			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, onDective);
+			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, onActive);
 			//NOTIFICATION
 			CONFIG::ANDROID
 			{
 				NotificationPush.notifyTomorrow(grConf);
-				NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, onDective);
 			}
 			//BACK press exit
 			CONFIG::ANDROID{
 				stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			}
+		}
 
+		private function onActive( event:Event ):void
+		{
+			CONFIG::ANDROID{
+				Umeng.getInstance().onResume();
 			}
 		}
 
@@ -105,6 +114,7 @@ package
 			CONFIG::ANDROID
 			{
 				NotificationPush.notifyTomorrow(grConf);
+				Umeng.getInstance().onPause();
 			}
 		}
 		private var isAdConfigLoading:Boolean =true;

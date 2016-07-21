@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application xmlns="http://ns.adobe.com/air/application/17.0">
+<application xmlns="http://ns.adobe.com/air/application/20.0">
   <id>${buneleID}</id>
   <filename>Game</filename>
   <name>
@@ -36,7 +36,7 @@
       </activity>
       <!-- UMeng -->
       <meta-data android:value="${androidUMeng}" android:name="UMENG_APPKEY" />
-      <meta-data android:value="UMChannel_Debug" android:name="UMENG_CHANNEL"/>
+      <meta-data android:value="MSSP_INMOBI" android:name="UMENG_CHANNEL"/>
                     <service android:name="com.juankpro.ane.localnotif.LocalNotificationIntentService"/>
                     <receiver android:name="com.juankpro.ane.localnotif.AlarmIntentService" />
                     <receiver android:name="com.juankpro.ane.localnotif.AlarmRestoreOnBoot" >
@@ -87,9 +87,9 @@
   <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
   <extensions>
       <extensionID>org.mousebomb.ane.getsignhash</extensionID>
+      <extensionID>org.mousebomb.ane.umengAndroid</extensionID>
       <extensionID>so.cuo.platform.baidussp</extensionID>
       <extensionID>com.inmobi.plugin.adobeair</extensionID>
-      <extensionID>ane.ios.UMMobClickAne</extensionID>
       <extensionID>com.juankpro.ane.LocalNotification</extensionID>
   </extensions>
   <icon>
