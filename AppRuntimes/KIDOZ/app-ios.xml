@@ -33,12 +33,16 @@
   <key>UIStatusBarStyle</key>
   <string>UIStatusBarStyleBlackOpaque</string>
   <key>UIRequiresPersistentWiFi</key>
-  <string>YES</string>]]></InfoAdditions>
+  <string>YES</string>
+  <key>MinimumOSVersion</key>
+  <string>7.1</string>
+  ]]></InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>
   <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
   <extensions>
     <extensionID>com.kidoz.sdk.api.platforms</extensionID>
+    <extensionID>ane.ios.UMMobClickAne</extensionID>
   </extensions>
   <icon>
     <image120x120>AppIcons/120.png</image120x120>

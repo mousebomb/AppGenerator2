@@ -77,7 +77,7 @@ package org.mousebomb.tianse
 			ui.addChild(brushSet);
 
 			//
-			paintArea = new Rectangle(0, ui.backBtn.height, GameConf.DESIGN_SIZE_W, GameConf.VISIBLE_SIZE_H_MINUS_AD- brushSet.height - ui.backBtn.height);
+			paintArea = new Rectangle(0, 120, GameConf.DESIGN_SIZE_W, GameConf.VISIBLE_SIZE_H_MINUS_AD- brushSet.height - 120);
 			var pictureClassName : String = "Pic" + id;
 			var clazz : Class = getDefinitionByName(pictureClassName) as Class;
 			pic = new clazz();

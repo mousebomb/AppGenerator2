@@ -4,142 +4,158 @@
 package
 {
 
-import com.aoaogame.sdk.AnalysisManager;
-import com.aoaogame.sdk.UMAnalyticsManager;
-import com.kidoz.sdk.api.platforms.SdkController;
+	import com.aoaogame.sdk.UMAnalyticsManager;
+	import com.kidoz.sdk.api.platforms.SdkController;
 
-import flash.desktop.NativeApplication;
+	import flash.desktop.NativeApplication;
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.IEventDispatcher;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.IEventDispatcher;
-import flash.events.KeyboardEvent;
-import flash.system.Capabilities;
-import flash.ui.Keyboard;
+	import org.mousebomb.DebugHelper;
+	import org.mousebomb.NotificationPush;
+	import org.mousebomb.ane.umeng.Umeng;
 
-//	import org.mousebomb.AoaoSelfAd;
-
-import org.mousebomb.DebugHelper;
-
-import org.mousebomb.NotificationPush;
-
-/**
- * 此类提供各种功能，比如广告展示，更多广告，统计，通知等
- */
-public class GRLib extends Sprite
-{
-	private var grConf:GRConfig;
-
-	static var controller:SdkController;
-
-
-	public function GRLib()
-	{
-		this.addEventListener( Event.ADDED_TO_STAGE, onStage );
-	}
-
-	private function onStage( event:Event ):void
-	{
-		bindRoot(stage.root);
-		new DebugHelper(stage);
-	}
+	//	import org.mousebomb.AoaoSelfAd;
 
 	/**
-	 * 绑定root 监听事件调用
-	 * @param r
+	 * 此类提供各种功能，比如广告展示，更多广告，统计，通知等
 	 */
-	public function bindRoot( r:IEventDispatcher )
+	public class GRLib extends Sprite
 	{
-		grConf = new GRConfig();
-		//
-		r.addEventListener( "GENG_DUO", onGengDuo );
-		r.addEventListener( "BANNER", onBanner );
-		r.addEventListener( "INTERSTITIAL", onInterstitial );
-		// ad
-		controller = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
-		controller.addFeedButton(20,20);
-		controller.changeFeedButtonVisibilityState(false);
-		//
+		private var grConf:GRConfig;
 
-//			// aoao Ad
-//			AoaoSelfAd.init(grConf.aoaoAppID, stage , AoaoSelfAd[grConf.moreClosePos]);
-//			// aoao analysis
-//			AnalysisManager.instance.setAnalytics(grConf.aoaoAppID, "com.aoaogame.game"+grConf.aoaoAppID+".analysis");
-//			// UMAnalytics
-//			CONFIG::IOS
-//			{
-//				UMAnalyticsManager.instance.startWithAppkey(grConf.iosUMeng);
-//				UMAnalyticsManager.instance.startSession();
-//			}
-//			CONFIG::ANDROID
-//			{
-//				UMAnalyticsManager.instance.startSession();
-//			}
-		//NOTIFICATION
-		CONFIG::ANDROID
+		static var controller:SdkController;
+
+
+		public function GRLib()
 		{
-			NotificationPush.notifyTomorrow(grConf);
+			this.addEventListener( Event.ADDED_TO_STAGE, onStage );
+		}
+
+		private function onStage( event:Event ):void
+		{
+			bindRoot(stage.root);
+			new DebugHelper(stage);
+		}
+
+		/**
+		 * 绑定root 监听事件调用
+		 * @param r
+		 */
+		public function bindRoot( r:IEventDispatcher )
+		{
+			grConf = new GRConfig();
+			//
+			r.addEventListener( "GENG_DUO", onGengDuo );
+			r.addEventListener( "BANNER", onBanner );
+			r.addEventListener( "INTERSTITIAL", onInterstitial );
+			// ad
+			controller = SdkController.initSdkContoller(grConf.KIDOZ_PUBLISHERID,grConf.KIDOZ_SECURITY_TOKEN);
+			controller.loadInterstitialView(false);
+			//
+
+			// UMAnalytics
+			CONFIG::IOS
+			{
+				UMAnalyticsManager.instance.startWithAppkey(grConf.iosUMeng);
+				UMAnalyticsManager.instance.startSession();
+			}
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, onDective);
+			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, onActive);
+			//NOTIFICATION
+			CONFIG::ANDROID
+			{
+				NotificationPush.notifyTomorrow(grConf);
+			}
+			//BACK press exit
+			CONFIG::ANDROID{
+				stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			}
+			onBanner(null);
 		}
-		//BACK press exit
-		CONFIG::ANDROID{
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 
-		}
-		onBanner(null);
-	}
-
-	private function onKeyDown( event:KeyboardEvent ):void
-	{
-		if (event.keyCode == Keyboard.BACK)
+		private function onKeyDown( event:KeyboardEvent ):void
 		{
-			event.preventDefault();
-			NativeApplication.nativeApplication.activeWindow.close();
-			NativeApplication.nativeApplication.exit();
+			if (event.keyCode == Keyboard.BACK)
+			{
+				event.preventDefault();
+				NativeApplication.nativeApplication.activeWindow.close();
+				NativeApplication.nativeApplication.exit();
+			}
 		}
-	}
-
-	private function onDective( event:Event ):void
-	{
-		CONFIG::ANDROID
+		private function onActive( event:Event ):void
 		{
-			NotificationPush.notifyTomorrow(grConf);
+			CONFIG::ANDROID{
+				Umeng.getInstance().onResume();
+			}
 		}
-	}
-	private var nextInterstitialI:uint = 0;
-	private function onInterstitial( event:Event ):void
-	{
-		trace("GRLib/onInterstitial()");
 
-		if(++nextInterstitialI % grConf.interstitialAdLevel == 0)
+		private function onDective( event:Event ):void
 		{
-			controller.changeFeedButtonVisibilityState(true);
+			CONFIG::ANDROID
+			{
+				NotificationPush.notifyTomorrow(grConf);
+				Umeng.getInstance().onPause();
+			}
 		}
-	}
+		private var lastInterstitialDisplayedTime:Date = new Date();
+		private function onInterstitial( event:Event ):void
+		{
+			trace("GRLib/onInterstitial()");
+			var now :Date = new Date();
+			if( now.valueOf()- lastInterstitialDisplayedTime.valueOf() >= grConf.interstitialAdCd*1000 )
+			{
+				showInterstitial( now );
+			}else{
+				//CD
+				DebugHelper.log("GRLib/onInterstitial() CD ing: left=" +( now.valueOf()- lastInterstitialDisplayedTime.valueOf() ));
+			}
+		}
 
-	private function onBanner( event:Event ):void
-	{
-		trace("GRLib/onBanner()");
+		private function showInterstitial( now:Date ):void
+		{
+				if(controller.getIsInterstitialLoaded())
+				{
+					controller.showInterstitialView();
+					lastInterstitialDisplayedTime= now;
+					DebugHelper.log("showInterstitial");
+				}
+				else
+				{
+					DebugHelper.log("loadInter");
+					controller.loadInterstitialView(false);
+				}
+		}
 
-		/** Add feed Panel to View  */
-		controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);
+		private function onBanner( event:Event ):void
+		{
+			trace("GRLib/onBanner()");
 
-		/** Set desired panel color (Optional) */
-		controller.setPanelViewColor("#FF9F3087");
+			/** Add feed Panel to View  */
+			controller.addPanleView(grConf.panelType,grConf.handlePosition);
 
-	}
+			/** Set desired panel color (Optional) */
+			controller.setPanelViewColor(grConf.panelColor);
+			//安卓上还有banner
+			controller.addBannerView(grConf.bannerPosition);
 
-	private function onGengDuo( event:Event ):void
-	{
-		trace("GRLib/onGengDuo()");
+		}
+
+		private function onGengDuo( event:Event ):void
+		{
+			trace("GRLib/onGengDuo()");
+			showInterstitial(new Date());
 //			AoaoSelfAd.showAd(  );
-	}
+		}
 
-	public static function get showMoreBtn():Boolean
-	{
-		return false;
+		public static function get showMoreBtn():Boolean
+		{
+			return controller.getIsInterstitialLoaded();
 //			return AoaoSelfAd.showMoreBtn;
-	}
+		}
 
-}
+	}
 }

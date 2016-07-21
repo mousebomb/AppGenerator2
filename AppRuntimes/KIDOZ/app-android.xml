@@ -61,6 +61,7 @@
   <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
   <extensions>
       <extensionID>org.mousebomb.ane.getsignhash</extensionID>
+      <extensionID>org.mousebomb.ane.umengAndroid</extensionID>
       <extensionID>com.juankpro.ane.LocalNotification</extensionID>
       <extensionID>com.kidoz.sdk.api.platforms</extensionID>
       <extensionID>com.support.v4.air.extension</extensionID>

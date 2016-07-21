@@ -12,26 +12,20 @@ package
 	{
 		[Embed(source="grconf.xml",mimeType="application/octet-stream")]
 		public var GRConfXML:Class;
-		public var baiduAndroidAppID:String;
-		public var baiduAndroidBanner:String;
-		public var baiduAndroidInterstitial:String;
-		public var admobAndroidBanner:String;
-		public var admobAndroidInterstitial:String;
 
-		public var baiduIOSAppID:String;
-		public var baiduIOSBanner:String;
-		public var baiduIOSInterstitial:String;
-		public var admobIOSBanner:String;
-		public var admobIOSInterstitial:String;
+		public var KIDOZ_PUBLISHERID:String;
+		public var KIDOZ_SECURITY_TOKEN:String;
 
 		public var iosUMeng:String ;
 
 		public var aoaoAppID : int ;
 
-		public var interstitialAdLevel:int;
-		public var bannerV:String;
-		public var bannerH:String;
-		public var moreClosePos:String;
+		//秒
+		public var interstitialAdCd:int;
+		public var panelType:int;
+		public var handlePosition:int;
+		public var panelColor:String;
+		public var bannerPosition:int;
 
 		public var notificationTitle:String;
 		public var notificationAction:String;
@@ -39,24 +33,16 @@ package
 		{
 			var x:XML = XML(new GRConfXML());
 
-			baiduIOSAppID = x.@iosBaiduAppID;
-			baiduIOSBanner = x.@iosBaiduBanner;
-			baiduIOSInterstitial = x.@iosBaiduInterstitial;
-			baiduAndroidAppID = x.@androidBaiduAppID;
-			baiduAndroidBanner = x.@androidBaiduBanner;
-			baiduAndroidInterstitial = x.@androidBaiduInterstitial;
-
-			admobIOSBanner = x.@iosAdmobBanner;
-			admobIOSInterstitial = x.@iosAdmobInterstitial;
-			admobAndroidBanner = x.@androidAdmobBanner;
-			admobAndroidInterstitial = x.@androidAdmobInterstitial;
+			KIDOZ_PUBLISHERID = x.@KIDOZ_PUBLISHERID;
+			KIDOZ_SECURITY_TOKEN = x.@KIDOZ_SECURITY_TOKEN;
 
 			iosUMeng = x.@iosUMeng;
 			aoaoAppID = x.@appID;
-			interstitialAdLevel = x.@interstitialAdLevel;
-			bannerH = x.@bannerH;
-			bannerV = x.@bannerV;
-			moreClosePos = x.@moreClosePos;
+			interstitialAdCd = x.@interstitialAdCd;
+			panelType = x.@panelType;
+			handlePosition = x.@handlePosition;
+			panelColor = x.@panelColor;
+			bannerPosition = x.@bannerPosition;
 
 			if (Capabilities.language == "zh-CN"
 					|| Capabilities.language == "zh-TW"
@@ -68,22 +54,14 @@ package
 				notificationAction= x.@notificationActionEn;
 			}
 			DebugHelper.log(
-			"baiduIOSAppID="+baiduIOSAppID+"\n"+
-			"baiduIOSBanner="+baiduIOSBanner+"\n"+
-			"baiduIOSInterstitial="+baiduIOSInterstitial+"\n"+
-			"baiduAndroidAppID="+baiduAndroidAppID+"\n"+
-			"baiduAndroidBanner="+baiduAndroidBanner+"\n"+
-			"baiduAndroidInterstitial="+baiduAndroidInterstitial+"\n"+
-			"admobIOSBanner="+admobIOSBanner+"\n"+
-			"admobIOSInterstitial="+admobIOSInterstitial+"\n"+
-			"admobAndroidBanner="+admobAndroidBanner+"\n"+
-			"admobAndroidInterstitial="+admobAndroidInterstitial+"\n"+
+			"KIDOZ_PUBLISHERID="+KIDOZ_PUBLISHERID+"\n"+
+			"KIDOZ_SECURITY_TOKEN="+KIDOZ_SECURITY_TOKEN+"\n"+
 			"iosUMeng="+iosUMeng+"\n"+
 			"aoaoAppID="+aoaoAppID+"\n"+
-			"interstitialAdLevel="+interstitialAdLevel+"\n"+
-			"bannerV="+bannerV+" "+
-			"bannerH="+bannerH+"\n"+
-			"moreClosePos="+moreClosePos+"\n"+
+			"interstitialAdCd="+interstitialAdCd+"\n"+
+			"panelType="+panelType+"\n"+
+			"handlePosition="+handlePosition+" "+
+			"panelColor="+panelColor+" "+
 			"notificationTitle="+notificationTitle+"\n"+
 			"notificationAction="+notificationAction+"\n"
 		);

@@ -7,11 +7,31 @@
 <body>
 <h1>KIDOZ</h1>
 <ul>
-<li>无友盟统计、无嗷嗷统计、无嗷嗷自家广告、无嗷嗷更多按钮</li>
+<li>无嗷嗷统计、无嗷嗷自家广告、无嗷嗷控制更多按钮</li>
+<li>友盟统计</li>
 <li>带24小时后发通知再来玩(仅安卓)</li>
 <li>KIDOZ儿童广告</li>
 <li>广告ID完全需要填死</li>
-<li>目前需要root为30版本的swf，且不兼容，所以无法使用，需要解决统计SDK后再把root改成30才能用</li>
+<li>Banner效果为：Panel广告； 安卓上额外有banner</li>
+<li>更多按钮点击为出现KIDOZ插屏</li>
+<li>如图，paneltype和handleposition设置:</li>
+<img src="../AppRuntimes/KIDOZ/panel.jpeg" alt=""/>
+    <li>
+        <ul>
+            <li>0BOTTOM,1TOP,1LEFT,2RIGHT</li>
+            <li>0START,1CENTER,2END</li>
+        </ul>
+    </li>
+    <li>Banner位置:
+    <pre>static native public const BANNER_POSITION_TOP:int = 0;
+  static native public const BANNER_POSITION_BOTTOM:int = 1;
+  static native public const BANNER_POSITION_TOP_LEFT:int = 2;
+
+  static native public const BANNER_POSITION_TOP_RIGHT:int = 3;
+  static native public const BANNER_POSITION_BOTTOM_LEFT:int = 4;
+  static native public const BANNER_POSITION_BOTTOM_RIGHT:int = 5;
+  </pre>
+    </li>
 </ul>
 </body>
 </html>
