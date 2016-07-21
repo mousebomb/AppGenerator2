@@ -35,6 +35,19 @@
         </intent-filter>
       </activity>
 
+        <!-- UMeng -->
+      <meta-data android:value="${androidUMeng}" android:name="UMENG_APPKEY" />
+      <meta-data android:value="KIDOZ_DEBUG" android:name="UMENG_CHANNEL"/>
+
+                    <service android:name="com.juankpro.ane.localnotif.LocalNotificationIntentService"/>
+                    <receiver android:name="com.juankpro.ane.localnotif.AlarmIntentService" />
+                    <receiver android:name="com.juankpro.ane.localnotif.AlarmRestoreOnBoot" >
+                        <intent-filter>
+                            <action android:name="android.intent.action.BOOT_COMPLETED" />
+                        </intent-filter>
+                    </receiver>
+
+            <!--KIDOZ-->
             <activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
                       android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
                     </activity>
