@@ -3,7 +3,7 @@ ${ADT}
 -target ipa-test-interpreter
 -storetype pkcs12
 -keystore ${KEYSTORE_IOS_DEV}
--storepass aoaogame
+-storepass ${p12pass}
 -provisioning-profile ${DEVPROVISION}
  ${genipa}
  ${gen}/app-ios.xml

@@ -136,6 +136,7 @@ if(!$compileSucc)
                     $output = str_replace('${gen}', $gen, $output);
                     $output = str_replace('${genipa}', $genipa, $output);
                     $output = str_replace('${KEYSTORE_IOS_DEV}', KEYSTORE_IOS_DEV, $output);
+                    $output = str_replace('${p12pass}', STOREPASS_IOS_AOAO, $output);
                     $output = str_replace('${DEVPROVISION}', DEVPROVISION, $output);
                     $output = str_replace('${icon}', $icon, $output);
                     $output = str_replace('${debug}', $debug, $output);
@@ -143,6 +144,14 @@ if(!$compileSucc)
                     if (file_exists($genipa)) {
                         echo "<pre>ipa保存在     " . $genipa . "\n</pre>";
                         ## 发布ipa-iTC
+                        if($autoFillData['p12ios']==1)
+                        {
+                            $keystoreIOS = KEYSTORE_IOS_RHETT;
+                            $p12Pass = STOREPASS_IOS_RHETT;
+                        }else{
+                            $keystoreIOS = KEYSTORE_IOS;
+                            $p12Pass = STOREPASS_IOS_AOAO;
+                        }
                         $buildIpaCmd = file_get_contents($gen . "/build_ipa_itc.txt");
                         $provision = $gen . '/release.mobileprovision';
                         if (file_exists($provision)) {
@@ -150,7 +159,8 @@ if(!$compileSucc)
                             $output = str_replace('${ADT}', ADT_IOS, $output);
                             $output = str_replace('${gen}', $gen, $output);
                             $output = str_replace('${genipa}', $genipaitc, $output);
-                            $output = str_replace('${KEYSTORE_IOS}', KEYSTORE_IOS, $output);
+                            $output = str_replace('${KEYSTORE_IOS}', $keystoreIOS, $output);
+                            $output = str_replace('${p12pass}', $p12Pass, $output);
                             $output = str_replace('${PROVISION}', $provision, $output);
                             $output = str_replace('${icon}', $icon, $output);
                             $output = str_replace('${debug}', $debug, $output);

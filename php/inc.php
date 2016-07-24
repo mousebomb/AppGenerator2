@@ -47,10 +47,15 @@ define("KEYSTORE",P12_ROOT."/".DEFAULT_P12APK);
 define("KEYSTORE_567",P12_ROOT."/".DEFAULT_P12APK_567);
 # ios p12
 define("KEYSTORE_IOS",P12_ROOT."/aoaogame_release.p12");
+define("KEYSTORE_IOS_RHETT",P12_ROOT."/RhettGao_release.p12");
 define("KEYSTORE_IOS_DEV",P12_ROOT."/aoaogame_develop.p12");
 define("DEVPROVISION",P12_ROOT."/aoaoDev.mobileprovision");
+//安卓的p12密码
 define("STOREPASS","ilikeasp");
-define("STOREPASS_IOS","aoaogame");
+//ios的p12密码(release+debug)
+define("STOREPASS_IOS_AOAO","aoaogame");
+//ios的p12密码(release)
+define("STOREPASS_IOS_RHETT","ilikeasp");
 
 #配合壳的加密功能
 define("MAIN_SWF",'main.swf');
