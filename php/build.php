@@ -219,7 +219,7 @@ if(!$compileSucc)
                     execCmd(FLEX_HOME . "/lib/android/bin/adb install -r " . $genapk, "尝试安装到手机");
                     //            execCmd(APP_ROOT."/util/adb install -r ".$genapk,"尝试安装到手机");
                 }
-
+                echo '<p> <a href="channels.php?id='.$appID.'">转化为各个渠道包</a> </p>';
                 break;
         }
     } else {

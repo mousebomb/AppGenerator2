@@ -28,6 +28,7 @@ define("PHP_ROOT",dirname(__FILE__));
 define("GENERATOED_ROOT",APP_ROOT."/Generated");
 define("TEMPLATES_ROOT",APP_ROOT."/AppTemplates");
 define("RUNTIMES_ROOT",APP_ROOT."/AppRuntimes");
+define("UTIL_ROOT",APP_ROOT."/util");
 define("GR_ROOT",APP_ROOT."/GRROOT");
 define("P12_ROOT",APP_ROOT."/p12");
 
