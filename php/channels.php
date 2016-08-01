@@ -84,7 +84,7 @@ function buildChannel($srcApk,$dstApk,$template,$channel,$tmpDir,$dDir)
     if (0==$repCount) {
         die ("XML替换失败\n<br/>");
     }
-    file_put_contents($dDir."/AndroidManifest2.xml",$opManifest);
+    file_put_contents($dDir."/AndroidManifest.xml",$opManifest);
 
 //    return;
 

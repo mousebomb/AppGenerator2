@@ -139,8 +139,8 @@ package
 
 			CONFIG::ANDROID{
 				controller.addPanleView(grConf.panelType,grConf.handlePositionAndroid);
-				//安卓上还有banner
-				controller.addBannerView(grConf.bannerPosition);
+				////安卓上还有banner
+				//controller.addBannerView(grConf.bannerPosition);
 			}
 			CONFIG::IOS{
 				//iOS上必须在下方
