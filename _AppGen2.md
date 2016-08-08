@@ -15,6 +15,7 @@
 一键发布时，PHP调用AIRSDK的工具打包，adl桌面测试。
 所使用从AppTemplates里同步文件并替换信息文件中的配置，然后打包。
 用户还需要上传自己做好的美术swc／mp3、icon、default; Icon只需要传1024尺寸的。
+模板template下的fillvars.txt 优先级高于runtimes下的fillvars.txt 高于 template下的fillvarsc.txt
 
 
 ### 模块

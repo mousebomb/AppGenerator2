@@ -39,8 +39,11 @@ public class KeH extends Sprite
 		stage.align = StageAlign.TOP_LEFT;
 		stage.scaleMode=StageScaleMode.NO_SCALE;
 		trace(stage.fullScreenWidth+"x"+stage.fullScreenHeight );
-		scaleX = stage.fullScreenWidth/ ${gameW} ;
-		scaleY = stage.fullScreenHeight/ ${gameH};
+		if(${gameW} && ${gameH})
+		{
+			scaleX = stage.fullScreenWidth / ${gameW};
+			scaleY = stage.fullScreenHeight / ${gameH};
+		}
 	}
 }
 }

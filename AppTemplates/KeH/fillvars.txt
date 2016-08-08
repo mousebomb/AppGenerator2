@@ -1,4 +1,4 @@
-# replacelist 额外要填充的变量
+# replacelist 额外要填充的变量 (只要这里有值就会优先于fillvarsc)
 Banner横向位置*:bannerH=RIGHT LEFT CENTER
 Banner纵向位置*:bannerV=TOP BOTTOM
 游戏宽度*:gameW=700
