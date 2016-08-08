@@ -92,6 +92,7 @@ require_once dirname(__FILE__) . "/inc.php";
                         if($extname != '.p12') continue;
                         if( P12_ROOT."/".$eachP12 == KEYSTORE_IOS
                             || P12_ROOT."/".$eachP12 == KEYSTORE_IOS_DEV
+                            || P12_ROOT."/".$eachP12 == KEYSTORE_IOS_RHETT
                         ) continue;
                         $isSelected = ($eachP12 == DEFAULT_P12APK_567);
                         ?>
@@ -102,6 +103,15 @@ require_once dirname(__FILE__) . "/inc.php";
                     ?>
                 </select>
 
+            </td>
+        </tr>
+        <tr>
+            <td>签名（苹果）</td>
+            <td>
+                <label>使用Rhett的
+                    <input type="radio" name="p12ios" id="" value="1" <?php  if($autoFillData['p12ios']==1){ echo 'checked';} ?> /></label>
+                <label>使用嗷嗷
+                    <input type="radio" name="p12ios" id="" value="0" <?php  if($autoFillData['p12ios']!=1){ echo 'checked';} ?>/></label>
             </td>
         </tr>
 

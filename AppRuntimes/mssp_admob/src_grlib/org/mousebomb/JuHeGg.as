@@ -267,6 +267,7 @@ public class JuHeGg extends EventDispatcher
 	 */
 	public function showBanner( horizontal:String = CENTER, vertical:String = TOP ):void
 	{
+		DebugHelper.log("JH.showBanner()");
 		bannerHorizontal = horizontal;
 		bannerVertical = vertical;
 		hideBanner();
