@@ -35,13 +35,13 @@ package
 			_scene = new UIWelcome();
 			rootView.addChild(_scene);
 			//
-			if(CONFIG::DEBUG)
-			{
-				var tf:TextField = new TextField();
-				tf.text = "DEBUG VERSION";
-				trace("DEBUG VERSION");
-				addChild(tf);
-			}
+			//if(CONFIG::DEBUG)
+			//{
+			//	var tf:TextField = new TextField();
+			//	tf.text = "DEBUG VERSION";
+			//	trace("DEBUG VERSION");
+			//	addChild(tf);
+			//}
 		}
 
 		public function replaceScene(scene : Sprite) : void
