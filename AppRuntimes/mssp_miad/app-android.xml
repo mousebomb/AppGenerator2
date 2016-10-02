@@ -38,7 +38,7 @@
         <activity
             android:name="org.mousebomb.ane.miad.SplashActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
+            android:screenOrientation="${aspectRatio}"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
         </activity>
         <activity
