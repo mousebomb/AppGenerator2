@@ -152,7 +152,7 @@ package
 
 		public static function get showMoreBtn():Boolean
 		{
-			return AoaoSelfAd.showMoreBtn;
+			return false;//AoaoSelfAd.showMoreBtn;
 		}
 
 	}
