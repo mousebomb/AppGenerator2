@@ -17,6 +17,7 @@ import flash.system.Capabilities;
 
 import org.mousebomb.ane.miad.MiAd;
 
+
 import so.cuo.platform.baidu.BaiDu;
 import so.cuo.platform.baidu.BaiDuAdEvent;
 import so.cuo.platform.baidu.RelationPosition;
@@ -189,7 +190,6 @@ public class JuHeGg extends EventDispatcher
 		{
 			//result   Array of  {"adtype":"ADMOB","bannerKey":"ca-app-pub-3981702146870599\/5554406619","bannerPercent":"0","interstitialPercent":"0","interstitialKey":"ca-app-pub-3981702146870599\/7031139812"}
 			DebugHelper.log(_urlLoader.data);
-			_miAd.setKeys(_defMiAppID,_defMiSplashId,_defMiInterstitialId);
 			var baiduAppID :String = res.result.msspAppID;
 			var baiduBannerID :String = res.result.msspBannerID;
 			var baiduInterstitialID :String = res.result.msspInterstitialID;
@@ -214,7 +214,6 @@ public class JuHeGg extends EventDispatcher
 
 	private function useDefaultKeys():void
 	{
-		_miAd.setKeys(_defMiAppID,_defMiSplashId,_defMiInterstitialId);
 		_baidu.setKeys( _defBaiduAppID, _defBaiduBannerId, _defBaiduInterstitialId );
 		DebugHelper.log("useDefaultKeys");
 		cacheInterstitial();
@@ -222,7 +221,11 @@ public class JuHeGg extends EventDispatcher
 
 	private function initANEs():void
 	{
+		// 特殊：小米的立即执行，因为要开屏
 		_miAd = MiAd.getInstance();
+		//_miAd.setDebugMode(true);
+		_miAd.setKeys(_defMiAppID,_defMiSplashId,_defMiInterstitialId);
+		//
 		_baidu = BaiDu.getInstance();
 		_baidu.addEventListener(BaiDuAdEvent.onInterstitialDismiss, onInterstitialDismissEvent);
 		_baidu.addEventListener(BaiDuAdEvent.onBannerFailedReceive, onBaiDuFailedReceive);
