@@ -1,0 +1,4 @@
+# 程序要替换的文本文件
+src_grlib/grconf.xml
+app-android.xml
+app-desktop.xml

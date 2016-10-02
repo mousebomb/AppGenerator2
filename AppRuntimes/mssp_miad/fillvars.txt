@@ -1,0 +1,18 @@
+# replacelist 额外要填充的变量
+版本:version=1.0
+名字:zhName=游戏名称
+繁体名字:twName=游戏名
+英文名字:enName=GameName
+包名:buneleID=com.aoaogame.game61
+统计ID-安卓:androidUMeng=53b8c81d56240b1d3405f238
+安卓-小米AppID(*不支持后台切换):androidMiAppID=
+安卓-小米Splash(*不支持后台切换):androidMiSplash=
+安卓-小米Interstitial(*不支持后台切换):androidMiInterstitial=
+MSSP-安卓-AppID:androidBaiduAppID=df49eec7
+MSSP-安卓-Banner:androidBaiduBanner=df49eec7
+MSSP-安卓-插屏:androidBaiduInterstitial=df49eec7
+通知标题 *:notificationTitle=一起来开动脑筋
+通知标题（英文） *:notificationTitleEn=Let us play
+滑动来___ *:notificationAction=装扮
+滑动来___（英文） *:notificationActionEn=Dress
+每N次调用才真正显示插屏*:interstitialAdLevel=1

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conf
+        androidBaiduAppID="${androidBaiduAppID}"
+        androidBaiduBanner=" ${androidBaiduBanner}"
+        androidBaiduInterstitial="${androidBaiduInterstitial}"
+
+        androidMiAppID="${androidMiAppID}"
+        androidMiSplash="${androidMiSplash}"
+        androidMiInterstitial="${androidMiInterstitial}"
+
+        interstitialAdLevel="${interstitialAdLevel}"
+        bannerV="${bannerV}"
+        bannerH="${bannerH}"
+        moreClosePos="${moreClosePos}"
+        appID="${appID}"
+
+        notificationTitleEn="${notificationTitleEn}"
+        notificationTitle="${notificationTitle}"
+        notificationActionEn="${notificationActionEn}"
+        notificationAction="${notificationAction}"
+        >
+</conf>
